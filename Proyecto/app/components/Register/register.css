@@ -1,0 +1,77 @@
+.register-container {
+    height: 100vh;
+    background-color: aqua;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(to top, rgba(30, 200, 255, 1), rgba(30, 144, 200, 1), rgba(30, 120, 200, 1));
+}
+
+.register-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 0.2rem;
+}
+
+.titulo-control {
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    font-weight: bold;
+    margin-bottom: 0.2rem;
+
+}
+
+/* .texto-formato-aviso {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.8rem;
+    color: yellow;
+    font-weight: bold;
+} */
+
+.control {
+    width: 18rem;
+    border: none;
+    outline-style: none;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.button-registrar:hover {
+    background-color: rgba(30, 110, 255, 0.5);
+}
+
+.button-registrar {
+    margin-top: 1rem;
+    background-color: rgba(30, 110, 255, 1);
+    color: white;
+    border: 0rem;
+    text-decoration: none;
+    height: 2rem;
+    font-weight: bold;
+    width: 18rem;
+    cursor: pointer;
+}
+
+.control-imagen-perfil {
+    display: none;
+}
+
+.input-file__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(30, 110, 255, 1);
+    color: white;
+    width: 18rem;
+    text-align: center;
+    cursor: pointer;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    height: 2rem;
+    font-size: 0.8rem;
+}
+
+.input-file__btn:hover {
+    background-color: rgba(30, 20, 255, 0.5);;
+}
