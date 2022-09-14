@@ -1,0 +1,63 @@
+body {
+    border: 0rem;
+    margin: 0rem;
+}
+
+.header-container {
+    top: 0;
+    left: 0;
+    right: 0;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: #FAFAFA;
+}
+
+.search-input {
+    height: 2.2rem;
+    width: 80%;
+}
+
+.search-container {
+    width: 30%;
+}
+
+.logo {
+    width: 6rem;
+    height: 5rem;
+}
+
+.button-inicio {
+    background-color: dodgerblue;
+    color: white;
+    border: 0rem;
+    text-decoration: none;
+    height: 2rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.button-inicio:hover {
+    background-color: rgba(30, 144, 255, 0.8);
+}
+
+.button-registrarse {
+    background-color: dodgerblue;
+    color: white;
+    border: 0rem;
+    text-decoration: none;
+    height: 2rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.button-registrarse:hover {
+    background-color: rgba(30, 144, 255, 0.8);
+}
+
+.button-search {
+    text-decoration: none;
+    height: 2rem;
+    cursor: pointer;
+}

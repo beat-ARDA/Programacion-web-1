@@ -6,6 +6,7 @@
     align-items: center;
     justify-content: center;
     background: linear-gradient(to top, rgba(30, 200, 255, 1), rgba(30, 144, 200, 1), rgba(30, 120, 200, 1));
+    margin-top: 2rem;
 }
 
 .register-row {
@@ -22,13 +23,6 @@
     margin-bottom: 0.2rem;
 
 }
-
-/* .texto-formato-aviso {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 0.8rem;
-    color: yellow;
-    font-weight: bold;
-} */
 
 .control {
     width: 18rem;
@@ -73,5 +67,22 @@
 }
 
 .input-file__btn:hover {
-    background-color: rgba(30, 20, 255, 0.5);;
+    background-color: rgba(30, 20, 255, 0.5);
+}
+
+footer {
+    text-align: center;
+    color: white;
+    min-height: 2rem;
+    background-color: #191919;
+    background-image: -moz-linear-gradient(top, #191919, #000000);
+    background-image: -o-linear-gradient(top, #191919, #000000);
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #191919), color-stop(1, #000000));
+    background-image: -webkit-linear-gradient(#191919, #000000);
+    background-image: linear-gradient(top, #191919, #000000);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#191919', endColorStr='#000000');
+    border-top: 1px solid rgba(50, 50, 50, 0.3);
+    width: 100%;
+    position: fixed;
+    bottom: 0;
 }

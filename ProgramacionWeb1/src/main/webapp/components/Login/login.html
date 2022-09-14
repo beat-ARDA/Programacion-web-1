@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+    <script src="../../jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="login.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="../Header/header.css" media="screen" />
+    <link rel="icon" type="image/x-icon" href="../../resources/logo.svg">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingresar al sitio</title>
+</head>
+
+<body>
+    <header class="header-container">
+        <img id="logo" class="logo" src="../../resources/logo.svg">
+        <div class="search-container">
+            <input placeholder="Buscar.." class="search-input" type="search"></input>
+            <button class="button-search">Buscar</button>
+        </div>
+        <div>
+            <button id="button-inicio" class="button-inicio">Iniciar sesion</button>
+            <button id="button-registrarse" class="button-registrarse">Registrarse</button>
+        </div>
+    </header>
+    <form class="login-container">
+        <div clas="icono-perfil-container">
+            <img class="icono-perfil" src="../../resources/usuario.png">
+        </div>
+        <div class="usuario-container">
+            <label class="label-usuario" for="usuario">Usuario:</label>
+            <input class="input-usuario" type="text" id="usuario" name="usuario">
+        </div>
+        <div class="contra-container">
+            <label class="label-contra" for="contraseña">Contraseña:</label>
+            <input class="input-contra" type="password" id="contraseña" name="contraseña">
+        </div>
+        <button class="button-inicio-sesion" type="submit">Iniciar sesion</button>
+    </form>
+    <footer>Alvaro Ramses Duron Alejo-Facultad de ciencias físico matemáticas</footer>
+</body>
+<script src="./login.js"></script>
+
+</html>
