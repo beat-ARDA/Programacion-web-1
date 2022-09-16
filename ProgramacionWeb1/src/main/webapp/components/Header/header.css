@@ -10,7 +10,7 @@ body {
     position: fixed;
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content:space-around;
     background-color: #FAFAFA;
 }
 
@@ -60,4 +60,13 @@ body {
     text-decoration: none;
     height: 2rem;
     cursor: pointer;
+}
+
+.imagen-perfil {
+    background-image: url("../../../resources/perfil-vacio.png");
+    width: 3rem;
+    height: 3rem; /* You must set a specified height */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover; /* Resize the background image to cover the entire container */
 }

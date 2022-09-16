@@ -1,86 +1,88 @@
 <!DOCTYPE html>
 <html lang="es">
 
-<head>
-    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
-    <script src="../../jquery-3.6.0.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="./register.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="../Header/header.css" media="screen" />
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="../../resources/logo.svg">
-    <title>Registrar usuario</title>
-</head>
+    <head>
+        <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+        <script src="../../jquery-3.6.0.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="./register.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="../Header/header.css" media="screen" />
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/x-icon" href="../../resources/logo.svg">
+        <title>Registrar usuario</title>
+    </head>
 
-<body>
-    <header class="header-container">
-        <img id="logo" class="logo" src="../../resources/logo.svg">
-        <div class="search-container">
-            <input placeholder="Buscar.." class="search-input" type="search"></input>
-            <button class="button-search">Buscar</button>
-        </div>
-        <div>
-            <button id="button-inicio" class="button-inicio">Iniciar sesion</button>
-            <button id="button-registrarse" class="button-registrarse">Registrarse</button>
-        </div>
-    </header>
+    <body>
+        <header class="header-container">
+            <img id="logo" class="logo" src="../../resources/logo.svg">
+            <!--<div class="search-container">
+                <input placeholder="Buscar.." class="search-input" type="search">
+                <button class="button-search">Buscar</button>
+            </div>-->
+            <div>
+                <button id="button-inicio" class="button-inicio">Iniciar sesion</button>
+                <!--<button id="button-registrarse" class="button-registrarse">Registrarse</button>-->
+            </div>
+            <!--<label id="nombre" class="nombre-estilo">Desconocido</label>
+            <div class="imagen-perfil"></div>-->
+        </header>
 
-    <form class="register-container">
-        <div class="register-row">
-            <label class="titulo-control" for="nombres">Nombre(s)</label>
-            <input pattern="^[a-zA-Z0-9À-ÿ\u00f1\u00d1]+(\s[a-zA-Z0-9À-ÿ\u00f1\u00d1]+)*$" required class="control"
-                id="nombres" type="text" />
-            <label id="formato-aviso-nombres"></label>
-        </div>
+        <form id="register-form" class="register-container">
+            <div class="register-row">
+                <label class="titulo-control" for="nombres">Nombre(s)</label>
+                <input pattern="^[a-zA-Z0-9À-ÿ\u00f1\u00d1]+(\s[a-zA-Z0-9À-ÿ\u00f1\u00d1]+)*$" required class="control"
+                       id="nombres" name="nombres" type="text" />
+                <label id="formato-aviso-nombres"></label>
+            </div>
 
-        <div class="register-row">
-            <label class="titulo-control" for="apellidos">Apellidos</label>
-            <input pattern="^[a-zA-Z0-9À-ÿ\u00f1\u00d1]+(\s[a-zA-Z0-9À-ÿ\u00f1\u00d1]+)*$" required class="control"
-                id="apellidos" type="text" />
-            <label id="formato-aviso-apellidos"></label>
-        </div>
+            <div class="register-row">
+                <label class="titulo-control" for="apellidos">Apellidos</label>
+                <input pattern="^[a-zA-Z0-9À-ÿ\u00f1\u00d1]+(\s[a-zA-Z0-9À-ÿ\u00f1\u00d1]+)*$" required class="control"
+                       id="apellidos" name="apellidos" type="text" />
+                <label id="formato-aviso-apellidos"></label>
+            </div>
 
-        <div class="register-row">
-            <label class="titulo-control" for="fecha-nacimiento">Fecha nacimiento</label>
-            <input required class="control" id="fecha-nacimiento" type="date" />
-            <label id="formato-aviso-fecha-nacimiento"></label>
-        </div>
+            <div class="register-row">
+                <label class="titulo-control" for="fecha-nacimiento">Fecha nacimiento</label>
+                <input required class="control" id="fecha-nacimiento" name="fecha-nacimiento" type="date" />
+                <label id="formato-aviso-fecha-nacimiento"></label>
+            </div>
 
-        <div class="register-row">
-            <label class="titulo-control" for="correo-electronico">Correo electronico</label>
-            <input required class="control" id="correo-electronico" type="email" />
-            <label id="formato-aviso-correo"></label>
-        </div>
+            <div class="register-row">
+                <label class="titulo-control" for="correo-electronico">Correo electronico</label>
+                <input required class="control" id="correo-electronico" name="correo-electronico" type="email" />
+                <label id="formato-aviso-correo"></label>
+            </div>
 
-        <div class="register-row">
-            <label class="titulo-control">Imagen de perfil</label>
-            <input class="control-imagen-perfil" id="imagen-perfil" type="file" />
-            <label class="input-file__btn" for="imagen-perfil">Selecciona una imagen de perfil</label>
-        </div>
+            <div class="register-row">
+                <label class="titulo-control">Imagen de perfil</label>
+                <input class="control-imagen-perfil" id="imagen-perfil" name="imagen-perfil" type="file" />
+                <label class="input-file__btn" for="imagen-perfil">Selecciona una imagen de perfil</label>
+            </div>
 
-        <div class="register-row">
-            <label class="titulo-control" for="nombre-usuario">Nombre de usuario</label>
-            <input required class="control" id="nombre-usuario" type="text" />
-            <label id="formato-aviso-usuario"></label>
-        </div>
+            <div class="register-row">
+                <label class="titulo-control" for="nombre-usuario">Nombre de usuario</label>
+                <input required class="control" id="nombre-usuario" name="nombre-usuario" type="text" />
+                <label id="formato-aviso-usuario"></label>
+            </div>
 
-        <div class="register-row">
-            <label class="titulo-control" for="contrasenia">Contraseña</label>
-            <input required class="control" id="contrasenia" type="password" />
-            <label id="formato-aviso-contrasenia"></label>
-        </div>
+            <div class="register-row">
+                <label class="titulo-control" for="contrasenia">Contraseña</label>
+                <input required class="control" id="contrasenia" name="contrasenia" type="password" />
+                <label id="formato-aviso-contrasenia"></label>
+            </div>
 
-        <div class="register-row">
-            <label class="titulo-control" for="contrasenia-check">Confirmar contraseña</label>
-            <input required class="control" id="contrasenia-check" type="password" />
-            <label id="formato-aviso-contrasenia-check"></label>
-        </div>
+            <div class="register-row">
+                <label class="titulo-control" for="contrasenia-check">Confirmar contraseña</label>
+                <input required class="control" id="contrasenia-check" type="password" />
+                <label id="formato-aviso-contrasenia-check"></label>
+            </div>
 
-        <button class="button-registrar" type="submit">Registrarme</button>
-    </form>
-    <footer>Alvaro Ramses Duron Alejo-Facultad de ciencias físico matemáticas</footer>
-</body>
-<script src="./register.js"></script>
+            <button class="button-registrar" type="submit">Registrarme</button>
+        </form>
+        <footer>Alvaro Ramses Duron Alejo-Facultad de ciencias físico matemáticas</footer>
+    </body>
+    <script src="./register.js"></script>
 
 </html>

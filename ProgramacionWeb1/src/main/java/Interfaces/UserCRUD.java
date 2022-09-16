@@ -11,6 +11,8 @@ public interface UserCRUD {
 
     public List selectUsuarios();
 
+    public Usuarios Log(Usuarios user);
+
     public boolean insertUser(Usuarios usuario);
 
     public boolean updateUser(Usuarios usuario);

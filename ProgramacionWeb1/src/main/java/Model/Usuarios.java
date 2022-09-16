@@ -16,18 +16,67 @@ public class Usuarios {
     public Usuarios() {
     }
 
-    public Usuarios(int idusuario, String username, String nombre, String apellidos, String contraseña, String correo_electronico, String fechaRegistro) {
+    public Usuarios(int idusuario, String username, String nombre, String apellidos, String contraseña, String correo_electronico, String imagen_perfil, String fechaNacimiento, String fechaRegistro) {
         this.idusuario = idusuario;
         this.username = username;
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.contraseña = contraseña;
         this.correo_electronico = correo_electronico;
+        this.imagen_perfil = imagen_perfil;
+        this.fechaNacimiento = fechaNacimiento;
         this.fechaRegistro = fechaRegistro;
+    }
+
+    public Usuarios(String username, String nombre, String apellidos, String contraseña, String correo_electronico, String imagen_perfil, String fechaNacimiento) {
+        this.username = username;
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.contraseña = contraseña;
+        this.correo_electronico = correo_electronico;
+        this.imagen_perfil = imagen_perfil;
+        this.fechaNacimiento = fechaNacimiento;
     }
 
     public Usuarios(String username, String contraseña) {
         this.username = username;
         this.contraseña = contraseña;
     }
+
+    public int getIdusuario() {
+        return idusuario;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getApellidos() {
+        return apellidos;
+    }
+
+    public String getContraseña() {
+        return contraseña;
+    }
+
+    public String getCorreo_electronico() {
+        return correo_electronico;
+    }
+
+    public String getImagen_perfil() {
+        return imagen_perfil;
+    }
+
+    public String getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public String getFechaRegistro() {
+        return fechaRegistro;
+    }
+
 }
