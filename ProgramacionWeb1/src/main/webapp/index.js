@@ -20,6 +20,10 @@ $(document).ready(function () {
         location.href = "./components/Register/register.html";
     });
 
+    $("#logo").click(function () {
+        window.location.href = "./components/AdministrarPublicaciones/administrar-publicaciones.html";
+    });
+
     $("#button-cerrarSession").click(function (event) {
 
         $.ajax({

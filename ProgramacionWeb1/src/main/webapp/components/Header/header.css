@@ -70,3 +70,23 @@ body {
     background-repeat: no-repeat; /* Do not repeat the image */
     background-size: cover; /* Resize the background image to cover the entire container */
 }
+
+.perfil-region {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.icono-elipsis {
+    height: 2rem;
+    padding-left: 1rem;
+     padding-right: 1rem;
+}
+
+.icono-elipsis:hover {
+    color: #00000070;
+}
+
+.nombre-estilo {
+    padding-right: 1rem;
+}

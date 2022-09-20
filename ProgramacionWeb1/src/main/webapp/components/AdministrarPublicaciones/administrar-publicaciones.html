@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
+-->
+<html>
+    <head>
+        <script src="../../jquery-3.6.0.min.js"></script>
+        <script src="../../all.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="./administrar-publicaciones.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="../Header/header.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="../../bootstrap.min.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="../../all.min.css" media="screen" />
+        <link rel="icon" type="image/x-icon" href="../../resources/logo.svg">
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>FCFM Social</title>
+    </head>
+    <body>
+        <header class="header-container">
+            <img id="logo" class="logo" src="../../resources/logo.svg">
+            <div class="search-container">
+                <input placeholder="Buscar.." class="search-input" type="search"/>
+                <button class="button-search">Buscar</button>
+            </div>
+            <div class="perfil-region">
+                <label id="nombre" class="nombre-estilo">Desconocido</label>
+                <div class="imagen-perfil-administrar"></div>
+                <div class="dropdown">
+                    <i class="icono-elipsis fa-solid fa-ellipsis-vertical" data-bs-toggle="dropdown" aria-expanded="false"></i>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="dropdown-item" href="./administrar-publicaciones.html">
+                                Administrar publicaciones
+                            </a>
+                        </li>
+                        <li><a class="dropdown-item" href="#">Perfil</a></li>
+                    </ul>
+                </div>
+                <button id="button-cerrarSession" class="button-inicio">Cerrar session</button>
+            </div>
+
+        </header>
+
+        <div class="cuerpo-administrar-publicaciones container-fluid">
+            <div class="row">
+                <div class="col d-flex justify-content-end">
+                    <button id="nueva-publicacion" class="me-5 btn btn-primary">Nueva publicacion</button>
+                </div>
+            </div>
+            <div class="row mx-5">
+                <div class="col">
+                    <div class="px-4 card mt-2 d-flex flex-row align-items-center justify-content-between">
+                        <label>Titulo</label>
+                        <label>Descripcion</label>
+                        <div class="d-flex flex-column">
+                            <label>Fecha-creacion</label>
+                            <label>No comentarios</label>
+                            <label>No votados</label>
+                        </div>
+                        <div>
+                            <i class="px-3 icono-administrar-usuario fa-solid fa-pen"></i>
+                            <i class="px-3 icono-administrar-usuario fa-solid fa-trash"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mx-5">
+                <div class="col">
+                    <div class="px-4 card mt-2 d-flex flex-row align-items-center justify-content-between">
+                        <label>Titulo</label>
+                        <label>Descripcion</label>
+                        <div class="d-flex flex-column">
+                            <label>Fecha-creacion</label>
+                            <label>No comentarios</label>
+                            <label>No votados</label>
+                        </div>
+                        <div>
+                            <i class="px-3 icono-administrar-usuario fa-solid fa-pen"></i>
+                            <i class="px-3 icono-administrar-usuario fa-solid fa-trash"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>Alvaro Ramses Duron Alejo-Facultad de ciencias físico matemáticas</footer>
+    </body>
+    <script src="./administrar-publicaciones.js"></script>
+    <script src="../../bootstrap.bundle.min.js" ></script>
+</html>

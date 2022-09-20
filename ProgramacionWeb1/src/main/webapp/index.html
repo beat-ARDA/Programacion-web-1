@@ -2,10 +2,12 @@
 <html lang="es">
 
     <head>
-        <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
         <script src="./jquery-3.6.0.min.js"></script>
+        <script src="./all.min.js"></script>
         <link rel="stylesheet" type="text/css" href="index.css" media="screen" />
         <link rel="stylesheet" type="text/css" href="./components//Header/header.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="./all.min.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="bootstrap.min.css" media="screen" />
         <link rel="icon" type="image/x-icon" href="./resources/logo.svg">
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,20 +17,32 @@
 
     <body>
         <header class="header-container">
-            <img class="logo" src="./resources/logo.svg">
+            
+                <img id="logo" class="logo" src="./resources/logo.svg">
+            
             <div class="search-container">
                 <input placeholder="Buscar.." class="search-input" type="search"/>
                 <button class="button-search">Buscar</button>
             </div>
-            <label id="nombre" class="nombre-estilo">Desconocido</label>
-            <div class="imagen-perfil"></div>
-            <div>
-                
+            <div class="perfil-region">
+                <label id="nombre" class="nombre-estilo">Desconocido</label>
+                <div class="imagen-perfil"></div>
+                <div class="dropdown">
+                    <i class="icono-elipsis fa-solid fa-ellipsis-vertical" data-bs-toggle="dropdown" aria-expanded="false"></i>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="./components/AdministrarPublicaciones/administrar-publicaciones.html">
+                                Administrar publicaciones
+                            </a>
+                        </li>
+                        <li><a class="dropdown-item" href="#">Perfil</a></li>
+                    </ul>
+                </div>
                 <button id="button-cerrarSession" class="button-inicio">Cerrar session</button>
             </div>
-            
+
         </header>
         <footer>Alvaro Ramses Duron Alejo-Facultad de ciencias físico matemáticas</footer>
     </body>
     <script src="./index.js"></script>
+    <script src="./bootstrap.bundle.min.js" ></script>
 </html>

@@ -16,29 +16,22 @@
     <body>
         <header class="header-container">
             <img id="logo" class="logo" src="../../resources/logo.svg">
-            <!--<div class="search-container">
-                <input placeholder="Buscar.." class="search-input" type="search">
-                <button class="button-search">Buscar</button>
-            </div>-->
             <div>
                 <button id="button-inicio" class="button-inicio">Iniciar sesion</button>
-                <!--<button id="button-registrarse" class="button-registrarse">Registrarse</button>-->
             </div>
-            <!--<label id="nombre" class="nombre-estilo">Desconocido</label>
-            <div class="imagen-perfil"></div>-->
         </header>
 
         <form id="register-form" class="register-container">
             <div class="register-row">
                 <label class="titulo-control" for="nombres">Nombre(s)</label>
-                <input pattern="^[a-zA-Z0-9À-ÿ\u00f1\u00d1]+(\s[a-zA-Z0-9À-ÿ\u00f1\u00d1]+)*$" required class="control"
+                <input required class="control"
                        id="nombres" name="nombres" type="text" />
                 <label id="formato-aviso-nombres"></label>
             </div>
 
             <div class="register-row">
                 <label class="titulo-control" for="apellidos">Apellidos</label>
-                <input pattern="^[a-zA-Z0-9À-ÿ\u00f1\u00d1]+(\s[a-zA-Z0-9À-ÿ\u00f1\u00d1]+)*$" required class="control"
+                <input required class="control"
                        id="apellidos" name="apellidos" type="text" />
                 <label id="formato-aviso-apellidos"></label>
             </div>
@@ -57,8 +50,9 @@
 
             <div class="register-row">
                 <label class="titulo-control">Imagen de perfil</label>
-                <input class="control-imagen-perfil" id="imagen-perfil" name="imagen-perfil" type="file" />
-                <label class="input-file__btn" for="imagen-perfil">Selecciona una imagen de perfil</label>
+                <input class="control-imagen-perfil" id="imagen-perfil" accept="image/png, image/jpg, image/jpeg" name="imagen-perfil" type="file" />
+                <label id="imagen-perfil-fake" class="input-file__btn"  for="imagen-perfil">Selecciona una imagen de perfil</label>
+                <img id="imagen-perfil-prev" class="texto-perfil-fake" src="" alt="Imagen prev">
             </div>
 
             <div class="register-row">

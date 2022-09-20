@@ -6,8 +6,8 @@
     align-items: center;
     justify-content: center;
     background: linear-gradient(to top, rgba(30, 200, 255, 1), rgba(30, 144, 200, 1), rgba(30, 120, 200, 1));
-    /*margin-top: 2rem;*/
-    padding-top: 2rem;
+    padding-top: 8rem;
+    padding-bottom: 4rem;
 }
 
 .register-row {
@@ -86,4 +86,11 @@ footer {
     width: 100%;
     position: fixed;
     bottom: 0;
+}
+
+.texto-perfil-fake {
+    color: white;
+    width: 6rem;
+    height: 6rem;
+    margin-top: 1rem;
 }

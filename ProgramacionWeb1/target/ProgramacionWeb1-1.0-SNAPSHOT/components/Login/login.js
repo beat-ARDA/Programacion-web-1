@@ -1,3 +1,15 @@
+$.ajax({
+    type: 'GET',
+    dataType: "json",
+    url: "../../RevisarSesion"
+}).done(function (data, textEstado, jqXHR) {
+    if (data.resultado) {
+        window.location.href = "../../index.html";
+    }
+}).fail(function (jqXHR, textEstado) {
+    console.log("La solicitud no se pudo realizar error: " + textEstado);
+});
+
 $(document).ready(function () {
     $("#button-registrarse").click(function () {
         location.href = "../Register/register.html";
