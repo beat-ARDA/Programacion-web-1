@@ -16,7 +16,7 @@ public interface PublicacionCRUD {
 
     public boolean insertPublicacion(Publicacion publicacion);
 
-    public boolean updatePublicacion(Publicacion publicacion);
+    public boolean updatePublicacion(Publicacion publicacion, Publicacion id);
 
     public boolean deletePublicacion(Publicacion publicacion);
 }

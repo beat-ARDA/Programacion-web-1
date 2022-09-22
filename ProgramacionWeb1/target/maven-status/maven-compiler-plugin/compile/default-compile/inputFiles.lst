@@ -3,12 +3,15 @@ C:\Users\e-arduron\Desktop\MIO\Sem Ago-Dic 2022\Progra web1\Programacion-web-1\P
 C:\Users\e-arduron\Desktop\MIO\Sem Ago-Dic 2022\Progra web1\Programacion-web-1\ProgramacionWeb1\src\main\java\Controlador\RevisarSesion.java
 C:\Users\e-arduron\Desktop\MIO\Sem Ago-Dic 2022\Progra web1\Programacion-web-1\ProgramacionWeb1\src\main\java\Interfaces\PublicacionCRUD.java
 C:\Users\e-arduron\Desktop\MIO\Sem Ago-Dic 2022\Progra web1\Programacion-web-1\ProgramacionWeb1\src\main\java\Controlador\ObtenerPublicaciones.java
+C:\Users\e-arduron\Desktop\MIO\Sem Ago-Dic 2022\Progra web1\Programacion-web-1\ProgramacionWeb1\src\main\java\Controlador\EliminarPublicacion.java
 C:\Users\e-arduron\Desktop\MIO\Sem Ago-Dic 2022\Progra web1\Programacion-web-1\ProgramacionWeb1\src\main\java\Interfaces\UserCRUD.java
+C:\Users\e-arduron\Desktop\MIO\Sem Ago-Dic 2022\Progra web1\Programacion-web-1\ProgramacionWeb1\src\main\java\Controlador\ObtenerPublicacion.java
 C:\Users\e-arduron\Desktop\MIO\Sem Ago-Dic 2022\Progra web1\Programacion-web-1\ProgramacionWeb1\src\main\java\Controlador\ObtenerUsuario.java
 C:\Users\e-arduron\Desktop\MIO\Sem Ago-Dic 2022\Progra web1\Programacion-web-1\ProgramacionWeb1\src\main\java\DAO\UsuarioDAO.java
 C:\Users\e-arduron\Desktop\MIO\Sem Ago-Dic 2022\Progra web1\Programacion-web-1\ProgramacionWeb1\src\main\java\Config\Conexion.java
 C:\Users\e-arduron\Desktop\MIO\Sem Ago-Dic 2022\Progra web1\Programacion-web-1\ProgramacionWeb1\src\main\java\Model\Publicacion.java
 C:\Users\e-arduron\Desktop\MIO\Sem Ago-Dic 2022\Progra web1\Programacion-web-1\ProgramacionWeb1\src\main\java\Controlador\Login.java
+C:\Users\e-arduron\Desktop\MIO\Sem Ago-Dic 2022\Progra web1\Programacion-web-1\ProgramacionWeb1\src\main\java\Controlador\ActualizarPublicacion.java
 C:\Users\e-arduron\Desktop\MIO\Sem Ago-Dic 2022\Progra web1\Programacion-web-1\ProgramacionWeb1\src\main\java\Controlador\CerrarSesion.java
 C:\Users\e-arduron\Desktop\MIO\Sem Ago-Dic 2022\Progra web1\Programacion-web-1\ProgramacionWeb1\src\main\java\Controlador\InsertarPublicacion.java
 C:\Users\e-arduron\Desktop\MIO\Sem Ago-Dic 2022\Progra web1\Programacion-web-1\ProgramacionWeb1\src\main\java\DAO\PublicacionDAO.java

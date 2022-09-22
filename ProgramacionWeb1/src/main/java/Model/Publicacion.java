@@ -37,6 +37,22 @@ public class Publicacion {
         this.num_votos = num_votos;
     }
 
+    public Publicacion(String descripcion, String imagen, String texto, String titulo, int spoiler) {
+        this.descripcion = descripcion;
+        this.imagen = imagen;
+        this.texto = texto;
+        this.titulo = titulo;
+        this.spoiler = spoiler;
+    }
+
+    public int getNum_comentarios() {
+        return num_comentarios;
+    }
+
+    public int getNum_votos() {
+        return num_votos;
+    }
+
     public Publicacion(int id) {
         this.id = id;
     }

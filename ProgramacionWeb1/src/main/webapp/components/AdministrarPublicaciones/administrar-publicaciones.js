@@ -64,7 +64,7 @@ $(document).ready(function () {
     });
 
     $(document).on('click', '.editar-publicacion', function (e) {
-        window.location.href = "../Publicacion/publicacion.html";
+        window.location.href = "../EditarPublicacion/editarpublicacion.html";
         window.localStorage.setItem('publicacionId', e.currentTarget.id);
     });
 

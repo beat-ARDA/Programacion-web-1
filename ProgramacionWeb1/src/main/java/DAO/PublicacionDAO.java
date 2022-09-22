@@ -93,8 +93,25 @@ public class PublicacionDAO implements PublicacionCRUD {
     }
 
     @Override
-    public boolean updatePublicacion(Publicacion publicacion) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public boolean updatePublicacion(Publicacion publicacion, Publicacion id) {
+        String sql = "update publicaciones set texto = '" + publicacion.getTexto() + "', imagen = '" + publicacion.getImagen() + "', spoiler = " + publicacion.getSpoiler() + ", descripcion = '" + publicacion.getDescripcion() + "', \n"
+                + "titulo = '" + publicacion.getTitulo() + "' where id = " + id.getId() + ";";
+
+        try {
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+            int resultado = ps.executeUpdate();
+
+            if (resultado > 0) {
+                return true;
+            } else {
+                System.out.print(resultado);
+                return false;
+            }
+        } catch (SQLException ex) {
+            System.out.print("Error " + ex);
+            return false;
+        }
     }
 
     @Override

@@ -1,0 +1,92 @@
+<html>
+    <head>
+        <script src="../../jquery-3.6.0.min.js"></script>
+        <script src="../../all.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="./editarpublicacion.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="../Header/header.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="../../bootstrap.min.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="../../all.min.css" media="screen" />
+        <link rel="icon" type="image/x-icon" href="../../resources/logo.svg">
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>FCFM Social</title>
+    </head>
+    <body>
+        <header class="header-container">
+            <img id="logo" class="logo" src="../../resources/logo.svg">
+            <div class="search-container">
+                <input placeholder="Buscar.." class="search-input" type="search"/>
+                <button class="button-search">Buscar</button>
+            </div>
+            <div class="perfil-region">
+                <label id="nombre" class="nombre-estilo">Desconocido</label>
+                <div class="imagen-perfil-publicacion"></div>
+                <div class="dropdown">
+                    <i class="icono-elipsis fa-solid fa-ellipsis-vertical" data-bs-toggle="dropdown" aria-expanded="false"></i>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="dropdown-item" href="../AdministrarPublicaciones/administrar-publicaciones.html">
+                                Administrar publicaciones
+                            </a>
+                        </li>
+                        <li><a class="dropdown-item" href="#">Perfil</a></li>
+                    </ul>
+                </div>
+                <button id="button-cerrarSession" class="button-inicio">Cerrar session</button>
+            </div>
+        </header>
+
+        <div class="cuerpo-publicacion container-fluid">
+            <form id="form-publicacion" class="input-group d-flex flex-column">
+                <div class="row">
+                    <div class="col-5">
+                        <input type="text" class="form-control" name="titulo" id="titulo" placeholder="Titulo...">
+                    </div>
+                    <div class="col-5">
+                        <input type="text" class="form-control" name="descripcion" id="descripcion" placeholder="Descripcion...">
+                    </div>
+                    <div class="col-2 d-flex align-items-center justify-content-center">
+                        <button type="submit" class="w-100 btn btn-primary">Actualizar</button>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-10">
+                        <div class="d-flex flex-column justify-content-center align-items-center">
+                            <input class="imagen form-control form-control-sm" id="imagen" accept="image/png, image/jpg, image/jpeg" name="imagen" type="file" />
+                            <label id="imagen-fake" class="input-file__btn"  for="imagen">Selecciona una imagen de perfil</label>
+                            <div class="img-container mb-2">
+                                <img id="imagen-prev" class="texto-fake" src="" alt="Imagen prev">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2 text-center">
+                        <label>Tags</label>
+                        <select data-placeholder="Begin typing a name to filter..." multiple class="w-100" name="tags">
+                            <option value="">None</option>
+                            <option>Tecnologia</option>
+                            <option>Web3</option>
+                            <option>Hack</option>
+                            <option>Javascript</option>
+                            <option>Html</option>
+                            <option>Github</option>
+                            <option>Visual studio</option>
+                            <option>Visual code</option>
+                        </select>
+                        <div class="mt-2 form-check">
+                            <input class="form-check-input" type="checkbox" value="spoiler" id="spoiler" name="spoiler">
+                            <label class="form-check-label" for="spoiler">
+                                Spoiler
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <textarea class="texto mt-2" id="texto" name="texto"></textarea>
+                <input name="id" value="21"/>
+            </form>
+        </div>
+        <footer>Alvaro Ramses Duron Alejo-Facultad de ciencias físico matemáticas</footer>
+    </body>
+    <script src="./editarpublicacion.js"></script>
+    <script src="../../bootstrap.bundle.min.js" ></script>
+</html>

@@ -38,9 +38,9 @@ public class InsertarPublicacion extends HttpServlet {
         String _spoiler = request.getParameter("spoiler");
         int spoiler = 1;
 
-        if(Objects.isNull(_spoiler))
+        if (Objects.isNull(_spoiler)) {
             spoiler = 0;
-
+        }
 
         Publicacion publicacion = new Publicacion(idusuarios, descripcion, imagen, texto, titulo, spoiler, 0, 0);
 
