@@ -6,6 +6,7 @@ import Model.Usuarios;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -25,6 +26,7 @@ public class UsuarioDAO implements UserCRUD {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
+    @Override
     public Usuarios Log(Usuarios user) {
         String sql = "select idusuarios, username, nombre, apellidos, fechaNacimiento, fechaRegistro, contraseña, correo_electronico, imagen_perfil from usuarios where username = '" + user.getUsername().trim() + "' AND contraseña = '" + user.getContraseña().trim() + "';";
         try {
@@ -35,14 +37,14 @@ public class UsuarioDAO implements UserCRUD {
 
             if (rs.next()) {
                 usuario = new Usuarios(
-                        rs.getInt("idusuarios"), rs.getString("username"),
+                        rs.getString("username"),
                         rs.getString("nombre"), rs.getString("apellidos"), rs.getString("contraseña"),
                         rs.getString("correo_electronico"), rs.getString("imagen_perfil"),
                         rs.getString("fechaNacimiento"), rs.getString("fechaRegistro")
                 );
             }
 
-        } catch (Exception ex) {
+        } catch (SQLException ex) {
             System.out.print("Error " + ex);
         }
 
@@ -95,6 +97,24 @@ public class UsuarioDAO implements UserCRUD {
     @Override
     public boolean deleteUser(Usuarios usuario) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public Usuarios getUserId(Usuarios user) {
+        String sql = "select idusuarios from usuarios where username = '" + user.getUsername().trim() + "';";
+        try {
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+
+            rs = ps.executeQuery(sql);
+
+            if (rs.next()) {
+                usuario = new Usuarios(rs.getInt("idusuarios"));
+            }
+        } catch (SQLException ex) {
+            System.out.print("Error " + ex);
+        }
+        return usuario;
     }
 
 }

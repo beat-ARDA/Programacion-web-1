@@ -16,8 +16,11 @@ public class Usuarios {
     public Usuarios() {
     }
 
-    public Usuarios(int idusuario, String username, String nombre, String apellidos, String contraseña, String correo_electronico, String imagen_perfil, String fechaNacimiento, String fechaRegistro) {
+    public Usuarios(int idusuario) {
         this.idusuario = idusuario;
+    }
+
+    public Usuarios(String username, String nombre, String apellidos, String contraseña, String correo_electronico, String imagen_perfil, String fechaNacimiento, String fechaRegistro) {
         this.username = username;
         this.nombre = nombre;
         this.apellidos = apellidos;
@@ -42,6 +45,12 @@ public class Usuarios {
         this.username = username;
         this.contraseña = contraseña;
     }
+
+    public Usuarios(String username) {
+        this.username = username;
+    }
+    
+    
 
     public int getIdusuario() {
         return idusuario;

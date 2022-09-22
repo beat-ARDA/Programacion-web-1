@@ -36,7 +36,8 @@ public class Login extends HttpServlet {
         if (respuestaUsuario != null) {
             session = request.getSession();
             session.setAttribute("usuario", respuestaUsuario);
-            resultado.put("resultado", true);
+            String userName = respuestaUsuario.getUsername();
+            resultado.put("resultado", userName);
         } else {
             resultado.put("resultado", false);
         }

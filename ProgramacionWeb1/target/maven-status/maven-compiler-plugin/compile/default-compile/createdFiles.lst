@@ -1,6 +1,13 @@
-Config\Conexion.class
+Controlador\CerrarSesion.class
 Controlador\Login.class
-Interfaces\UserCRUD.class
 Controlador\InsertarUsuario.class
+Controlador\RevisarSesion.class
 DAO\UsuarioDAO.class
 Model\Usuarios.class
+Config\Conexion.class
+Interfaces\PublicacionCRUD.class
+Controlador\InsertarPublicacion.class
+Interfaces\UserCRUD.class
+Controlador\ObtenerUsuario.class
+Model\Publicacion.class
+DAO\PublicacionDAO.class

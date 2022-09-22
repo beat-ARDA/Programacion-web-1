@@ -40,53 +40,51 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                 </div>
                 <button id="button-cerrarSession" class="button-inicio">Cerrar session</button>
             </div>
-
         </header>
 
         <div class="cuerpo-administrar-publicaciones container-fluid">
             <div class="row">
                 <div class="col d-flex justify-content-end">
                     <button id="nueva-publicacion" class="me-5 btn btn-primary">Nueva publicacion</button>
+
                 </div>
             </div>
-            <div class="row mx-5">
-                <div class="col">
-                    <div class="px-4 card mt-2 d-flex flex-row align-items-center justify-content-between">
-                        <label>Titulo</label>
-                        <label>Descripcion</label>
-                        <div class="d-flex flex-column">
-                            <label>Fecha-creacion</label>
-                            <label>No comentarios</label>
-                            <label>No votados</label>
-                        </div>
-                        <div>
-                            <i class="px-3 icono-administrar-usuario fa-solid fa-pen"></i>
-                            <i class="px-3 icono-administrar-usuario fa-solid fa-trash"></i>
-                        </div>
+            <div id="contenedor-cards">
+
+            </div>
+        </div>
+        <footer>Alvaro Ramses Duron Alejo-Facultad de ciencias físico matemáticas</footer>
+
+        <div class="modal fade" id="eliminar-publicacion-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Eliminar publicación</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                </div>
-            </div>
-            
-            <div class="row mx-5">
-                <div class="col">
-                    <div class="px-4 card mt-2 d-flex flex-row align-items-center justify-content-between">
-                        <label>Titulo</label>
-                        <label>Descripcion</label>
-                        <div class="d-flex flex-column">
-                            <label>Fecha-creacion</label>
-                            <label>No comentarios</label>
-                            <label>No votados</label>
-                        </div>
-                        <div>
-                            <i class="px-3 icono-administrar-usuario fa-solid fa-pen"></i>
-                            <i class="px-3 icono-administrar-usuario fa-solid fa-trash"></i>
-                        </div>
+                    <div class="modal-body">
+                        ¿Deseas eliminar la publicación?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button id="aceptar-eliminar-publicacion" type="button" class="btn btn-primary">Aceptar</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <footer>Alvaro Ramses Duron Alejo-Facultad de ciencias físico matemáticas</footer>
+        <div class="toast-container position-fixed bottom-0 end-0 p-3">
+            <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header">
+                    <strong class="me-auto">Eliminar publicacion</strong>
+                    <small>Hace un segundo</small>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body">
+                    La publicacion a sido eliminada
+                </div>
+            </div>
+        </div>
     </body>
     <script src="./administrar-publicaciones.js"></script>
     <script src="../../bootstrap.bundle.min.js" ></script>

@@ -12,6 +12,7 @@ body {
     align-items: center;
     justify-content:space-around;
     background-color: #FAFAFA;
+    z-index: 3;
 }
 
 .search-input {

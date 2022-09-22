@@ -21,16 +21,15 @@ $(document).ready(function () {
 
     $("#Login").submit(function (event) {
         event.preventDefault();
-
         $.ajax({
             data: $(this).serialize(),
             type: 'POST',
             dataType: "json",
             url: "../../Login"
         }).done(function (data, textEstado, jqXHR) {
-            console.log(data);
             if (data.resultado) {
-                alert("Credenciales correctas");
+                console.log(data.resultado);
+                window.localStorage.setItem('userName', data.resultado);
                 window.location.href = "../../index.html";
             } else {
                 alert("Credenciales incorrectas");

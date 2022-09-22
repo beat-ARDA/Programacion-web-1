@@ -39,5 +39,4 @@ public class RevisarSesion extends HttpServlet {
         out.print(json);
         out.flush();
     }
-
 }
