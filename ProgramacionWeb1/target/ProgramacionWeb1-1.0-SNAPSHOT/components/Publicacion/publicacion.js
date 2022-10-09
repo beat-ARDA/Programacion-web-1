@@ -11,7 +11,25 @@ $.ajax({
 });
 
 $(document).ready(function () {
-    console.log("Entre");
+    let userId = "";
+
+    $.ajax({
+        data: {"usuario": window.localStorage.getItem('userName')},
+        type: 'POST',
+        dataType: "json",
+        url: "../../ObtenerUsuario"
+    }).done(function (data, textEstado, jqXHR) {
+        if (!data.resultado) {
+            console.log("No fue posible regresar los datos");
+        } else {
+            userId = data.resultado.idusuario;
+            console.log(userId);
+        }
+    }
+    ).fail(function (jqXHR, textEstado)
+    {
+        console.log("La solicitud no se pudo realizar error: " + textEstado);
+    });
 
     $("#logo").click(function () {
         window.location.href = "../../index.html";
@@ -37,9 +55,14 @@ $(document).ready(function () {
 
     $('#form-publicacion').submit(function (event) {
         event.preventDefault();
-
         $.ajax({
-            data: $(this).serialize(),
+            data: {
+                "idusuarios": userId,
+                "descripcion": $("#descripcion").val(),
+                "imagen": null,
+                "texto": $("#texto").val(),
+                "titulo": $("#titulo").val(),
+                "spoiler": $("#spoiler option:selected").text()},
             type: "POST",
             dataType: "json",
             url: "../../InsertarPublicacion"

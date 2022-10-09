@@ -71,6 +71,7 @@ public class PublicacionDAO implements PublicacionCRUD {
                 + " (\n"
                 + "'" + publicacion.getTexto() + "',\n"
                 + "'" + publicacion.getImagen() + "',\n"
+                //+ "LOAD_FILE('" + publicacion.getImagen() + "'),\n"
                 + "'" + publicacion.getSpoiler() + "',\n"
                 + "'" + publicacion.getDescripcion() + "',\n"
                 + "'" + publicacion.getTitulo() + "',\n"
