@@ -24,9 +24,30 @@ public class PublicacionDAO implements PublicacionCRUD {
     Publicacion publicacion;
 
     @Override
-    public List selectPublicacionesUsuario(Usuarios user) {
+    public int selectCount(Usuarios user) {
+        int cantidad = 0;
+        String sql = "select count(*) from publicaciones where idusuarios = '" + user.getIdusuario() + "';";
+        try {
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+
+            rs = ps.executeQuery(sql);
+
+            while (rs.next()) {
+                cantidad = rs.getInt("count(*)");
+
+            }
+            rs.close();
+        } catch (SQLException ex) {
+            System.out.print("Error " + ex);
+        }
+        return cantidad;
+    }
+
+    @Override
+    public List selectPublicacionesUsuario(Usuarios user, int initialLimit, int nextLimit) {
         List<Publicacion> listaPublicaciones = new ArrayList<Publicacion>();
-        String sql = "select id, texto, imagen, spoiler, fecha_creacion, eliminada, descripcion, titulo, idusuarios, num_comentarios, num_votos from publicaciones where idusuarios = '" + user.getIdusuario() + "';";
+        String sql = "select id, texto, imagen, spoiler, fecha_creacion, eliminada, descripcion, titulo, idusuarios, num_comentarios, num_votos from publicaciones where idusuarios = " + user.getIdusuario() + " limit " + initialLimit + " offset " + nextLimit + ";";
         try {
             con = cn.getConnection();
             ps = con.prepareStatement(sql);

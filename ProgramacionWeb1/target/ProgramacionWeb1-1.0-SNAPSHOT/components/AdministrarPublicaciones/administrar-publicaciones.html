@@ -7,6 +7,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
     <head>
         <script src="../../jquery-3.6.0.min.js"></script>
         <script src="../../all.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="../../font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="./administrar-publicaciones.css" media="screen" />
         <link rel="stylesheet" type="text/css" href="../Header/header.css" media="screen" />
         <link rel="stylesheet" type="text/css" href="../../bootstrap.min.css" media="screen" />
@@ -26,7 +27,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
             </div>
             <div class="perfil-region">
                 <label id="nombre" class="nombre-estilo">Desconocido</label>
-                <div class="imagen-perfil-administrar"></div>
+                <div id="imagen-perfil" class="imagen-perfil-administrar"></div>
                 <div class="dropdown">
                     <i class="icono-elipsis fa-solid fa-ellipsis-vertical" data-bs-toggle="dropdown" aria-expanded="false"></i>
                     <ul class="dropdown-menu">
@@ -42,16 +43,29 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
             </div>
         </header>
 
-        <div class="cuerpo-administrar-publicaciones container-fluid">
+        <div class="cuerpo-administrar-publicaciones container d-flex flex-column align-items-center">
             <div class="row">
                 <div class="col d-flex justify-content-end">
-                    <button id="nueva-publicacion" class="me-5 btn btn-primary">Nueva publicacion</button>
-
+                    <i id="nueva-publicacion" class=" nueva-publi fa-solid fa-file"></i>
                 </div>
             </div>
             <div id="contenedor-cards">
 
             </div>
+            <nav aria-label="Page navigation example">
+                <ul id="pagination" class="pagination">
+                    <li id="previous" class="page-item">
+                        <a class="page-link" href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li id="next" class="page-item">
+                        <a id="pointer" class="page-link" href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
         </div>
         <footer>Alvaro Ramses Duron Alejo-Facultad de ciencias físico matemáticas</footer>
 

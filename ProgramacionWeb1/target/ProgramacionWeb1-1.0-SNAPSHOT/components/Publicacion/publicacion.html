@@ -43,7 +43,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         </header>
 
         <div class="cuerpo-publicacion container-fluid">
-            <form id="form-publicacion" class="input-group d-flex flex-column">
+            <form id="form-publicacion" class="input-group d-flex flex-column" enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-5">
                         <input type="text" class="form-control" name="titulo" id="titulo" placeholder="Titulo...">
@@ -67,7 +67,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                     </div>
                     <div class="col-2 text-center">
                         <label>Tags</label>
-                        <select id="spoiler" data-placeholder="Begin typing a name to filter..." multiple class="w-100" name="tags">
+                        <select 
+                            id="spoiler" 
+                            data-placeholder="Begin typing a name to filter..." 
+                            multiple class="w-100" 
+                            name="tags">
                             <option value="">None</option>
                             <option>Tecnologia</option>
                             <option>Web3</option>

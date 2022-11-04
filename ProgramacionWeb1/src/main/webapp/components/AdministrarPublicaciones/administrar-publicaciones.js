@@ -10,10 +10,54 @@ $.ajax({
     console.log("La solicitud no se pudo realizar error: " + textEstado);
 });
 $(document).ready(function () {
-    let idPublicacion = -1;
-
+    /*-----------------------------------------------------------------------*/
+    /*                             OBTENER USUARIO DATA HEADER               */
+    /*-----------------------------------------------------------------------*/
     $.ajax({
         data: {"usuario": window.localStorage.getItem('userName')},
+        type: 'GET',
+        dataType: "json",
+        url: "../../ObtenerUsuarioData"
+    }).done(function (data, textEstado, jqXHR) {
+        if (data)
+        {
+            $("#nombre").text(data.resultado.nombre + " " + data.resultado.apellidos);
+            $("#imagen-perfil").css("background-image", "url(../../" + data.resultado.imagen_perfil + ")");
+        }
+    }).fail(function (jqXHR, textEstado) {
+        console.log("La solicitud no se pudo realizar error: " + textEstado);
+    });
+    /*-----------------------------------------------------------------------*/
+    /*                             CERRAR SESION                             */
+    /*-----------------------------------------------------------------------*/
+    $("#button-cerrarSession").click(function (event) {
+        $.ajax({
+            type: 'GET',
+            dataType: "json",
+            url: "../../CerrarSesion"
+        }).done(function (data, textEstado, jqXHR) {
+            console.log(data);
+            if (data.resultado) {
+                alert("Sesion cerrada");
+                window.location.href = "../../index.html";
+            } else {
+                alert("No se pudo cerrar la sesion");
+            }
+        }).fail(function (jqXHR, textEstado) {
+            console.log("La solicitud no se pudo realizar error: " + textEstado);
+        });
+    });
+
+    /*-----------------------------------------------------------------------*/
+    /*              OBTENER PUBLICACIONES POR IDUSUARIO                      */
+    /*-----------------------------------------------------------------------*/
+    let cantidadPublicaciones;
+    let idPublicacion = -1;
+    let initialLimit = 2;
+    let nextLimit = 0;
+    $.ajax({
+        data: {
+            "usuario": window.localStorage.getItem('userName')},
         type: 'POST',
         dataType: "json",
         url: "../../ObtenerUsuario"
@@ -21,9 +65,26 @@ $(document).ready(function () {
         if (!data.resultado) {
             console.log("No fue posible regresar los datos");
         } else {
+            /*-----------------------------------------------------------------------*/
+            /*              OBTENER CANTIDAD                                         */
+            /*-----------------------------------------------------------------------*/
             $.ajax({
                 data: {"userId": data.resultado.idusuario},
-                type: 'POST',
+                type: 'GET',
+                dataType: "json",
+                url: "../../ObtenerCantidadPublicacionesPorUsuario"
+            }).done(function (data, textEstado, jqXHR) {
+                cantidadPublicaciones = data.resultado;
+            }).fail(function (jqXHR, textEstado) {
+                console.log("La solicitud no se pudo realizar error: " + textEstado);
+            });
+
+            $.ajax({
+                data: {
+                    "userId": data.resultado.idusuario,
+                    "initialLimit": initialLimit,
+                    "nextLimit": nextLimit},
+                type: 'GET',
                 dataType: "json",
                 url: "../../ObtenerPublicaciones"
             }).done(function (data, textEstado, jqXHR) {
@@ -32,25 +93,46 @@ $(document).ready(function () {
                 } else {
                     for (let i = 0; i < data.resultado.length; i++) {
                         $("#contenedor-cards").append(
-                                '<div class="row mx-5">' +
-                                '<div class="col">' +
-                                '<div class="px-4 card mt-2 d-flex flex-row align-items-center justify-content-between">' +
-                                '<label>' + data.resultado[i].titulo + '</label>' +
-                                '<label>' + data.resultado[i].descripcion + '</label>' +
-                                '<div class="d-flex flex-column">' +
-                                '<label>' + data.resultado[i].fecha_creacion + '</label>' +
-                                '<label>Num comentarios: ' + data.resultado[i].num_comentarios + '</label>' +
-                                '<label>Num votados: ' + data.resultado[i].num_votos + '</label>' +
+                                '<div class="container card mt-2">' +
+                                '<div class="row">' +
+                                '<div class="col-4">' +
+                                '<samll>' + data.resultado[i].fecha_creacion + '</samll>' +
                                 '</div>' +
-                                '<div>' +
-                                '<i id="' + data.resultado[i].id + '" class="px-3 editar-publicacion icono-administrar-usuario fa-solid fa-pen"></i>' +
-                                '<i data-bs-toggle="modal" data-bs-target="#eliminar-publicacion-modal" id="' + data.resultado[i].id + '" class="px-3 eliminar-publicacion icono-administrar-usuario fa-solid fa-trash"></i>' +
+                                '<div class="col-4 text-center">' +
+                                '<i id="' + data.resultado[i].id + '" class="editar-publicacion like-icon edit-icon fa-solid fa-pen-to-square"></i>' +
+                                '<i id="' + data.resultado[i].id + '" data-bs-toggle="modal" data-bs-target="#eliminar-publicacion-modal" class="eliminar-publicacion ps-2 like-icon trash-icon fa-solid fa-trash"></i>' +
                                 '</div>' +
+                                '<div class="col-4 d-flex justify-content-end">' +
+                                '<label>' + data.resultado[i].num_votos + '</label>' +
+                                '<i class="ps-1 like-icon fa-solid fa-thumbs-up"></i>' +
+                                '<label class="ps-1">' + data.resultado[i].num_comentarios + '</label>' +
+                                '<i class="ps-1 like-icon fa-solid fa-comment"></i>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="row">' +
+                                '<div class="col text-center">' +
+                                '<h1>' + data.resultado[i].titulo + '</h1>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="row">' +
+                                '<div class="col text-center">' +
+                                '<h5>' + data.resultado[i].descripcion + '</h5>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="row">' +
+                                '<div class="col d-flex justify-content-center">' +
+                                '<div id="imagen' + data.resultado[i].id + '" class="img-publicacion"></div>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="row">' +
+                                '<div class="col text-center">' +
+                                '<h6>' + data.resultado[i].texto + '</h6>' +
                                 '</div>' +
                                 '</div>' +
                                 '</div>'
-
                                 );
+
+                        $("#imagen" + data.resultado[i].id).css("background-image", "url(../../" + data.resultado[i].imagen + ")");
                     }
                 }
             }).fail(function (jqXHR, textEstado) {
@@ -62,16 +144,191 @@ $(document).ready(function () {
     {
         console.log("La solicitud no se pudo realizar error: " + textEstado);
     });
+    /*----------------------------------------------------------------*/
+    /*                       CLICK NEXT PAGINACION                    */
+    /*----------------------------------------------------------------*/
+    $(document).on('click', '#next', function (e) {
+        if (nextLimit + 2 < cantidadPublicaciones) {
+            nextLimit = nextLimit + 2;
+            $(".card").remove();
+            $.ajax({
+                data: {
+                    "usuario": window.localStorage.getItem('userName')},
+                type: 'POST',
+                dataType: "json",
+                url: "../../ObtenerUsuario"
+            }).done(function (data, textEstado, jqXHR) {
+                if (!data.resultado) {
+                    console.log("No fue posible regresar los datos");
+                } else {
+                    $.ajax({
+                        data: {
+                            "userId": data.resultado.idusuario,
+                            "initialLimit": initialLimit,
+                            "nextLimit": nextLimit},
+                        type: 'GET',
+                        dataType: "json",
+                        url: "../../ObtenerPublicaciones"
+                    }).done(function (data, textEstado, jqXHR) {
+                        if (!data.resultado) {
+                            console.log("No fue posible regresar los datos");
+                        } else {
+                            console.log(data);
+                            for (let i = 0; i < data.resultado.length; i++) {
+                                $("#contenedor-cards").append(
+                                        '<div class="container card mt-2">' +
+                                        '<div class="row">' +
+                                        '<div class="col-4">' +
+                                        '<samll>' + data.resultado[i].fecha_creacion + '</samll>' +
+                                        '</div>' +
+                                        '<div class="col-4 text-center">' +
+                                        '<i id="' + data.resultado[i].id + '" class="editar-publicacion like-icon edit-icon fa-solid fa-pen-to-square"></i>' +
+                                        '<i id="' + data.resultado[i].id + '" data-bs-toggle="modal" data-bs-target="#eliminar-publicacion-modal" class="eliminar-publicacion ps-2 like-icon trash-icon fa-solid fa-trash"></i>' +
+                                        '</div>' +
+                                        '<div class="col-4 d-flex justify-content-end">' +
+                                        '<label>' + data.resultado[i].num_votos + '</label>' +
+                                        '<i class="ps-1 like-icon fa-solid fa-thumbs-up"></i>' +
+                                        '<label class="ps-1">' + data.resultado[i].num_comentarios + '</label>' +
+                                        '<i class="ps-1 like-icon fa-solid fa-comment"></i>' +
+                                        '</div>' +
+                                        '</div>' +
+                                        '<div class="row">' +
+                                        '<div class="col text-center">' +
+                                        '<h1>' + data.resultado[i].titulo + '</h1>' +
+                                        '</div>' +
+                                        '</div>' +
+                                        '<div class="row">' +
+                                        '<div class="col text-center">' +
+                                        '<h5>' + data.resultado[i].descripcion + '</h5>' +
+                                        '</div>' +
+                                        '</div>' +
+                                        '<div class="row">' +
+                                        '<div class="col d-flex justify-content-center">' +
+                                        '<div id="imagen' + data.resultado[i].id + '" class="img-publicacion"></div>' +
+                                        '</div>' +
+                                        '</div>' +
+                                        '<div class="row">' +
+                                        '<div class="col text-center">' +
+                                        '<h6>' + data.resultado[i].texto + '</h6>' +
+                                        '</div>' +
+                                        '</div>' +
+                                        '</div>'
+                                        );
 
+                                $("#imagen" + data.resultado[i].id).css("background-image", "url(../../" + data.resultado[i].imagen + ")");
+                            }
+                        }
+                    }).fail(function (jqXHR, textEstado) {
+                        console.log("La solicitud no se pudo realizar error: " + textEstado);
+                    });
+                }
+            }
+            ).fail(function (jqXHR, textEstado)
+            {
+                console.log("La solicitud no se pudo realizar error: " + textEstado);
+            });
+        }
+    });
+
+    /*----------------------------------------------------------------*/
+    /*                       CLICK PREV PAGINACION                    */
+    /*----------------------------------------------------------------*/
+    $(document).on('click', '#previous', function (e) {
+        if (nextLimit > 0) {
+            nextLimit = nextLimit - 2;
+            $(".card").remove();
+            $.ajax({
+                data: {
+                    "usuario": window.localStorage.getItem('userName')},
+                type: 'POST',
+                dataType: "json",
+                url: "../../ObtenerUsuario"
+            }).done(function (data, textEstado, jqXHR) {
+                if (!data.resultado) {
+                    console.log("No fue posible regresar los datos");
+                } else {
+                    $.ajax({
+                        data: {
+                            "userId": data.resultado.idusuario,
+                            "initialLimit": initialLimit,
+                            "nextLimit": nextLimit},
+                        type: 'GET',
+                        dataType: "json",
+                        url: "../../ObtenerPublicaciones"
+                    }).done(function (data, textEstado, jqXHR) {
+                        if (!data.resultado) {
+                            console.log("No fue posible regresar los datos");
+                        } else {
+                            console.log(data);
+                            for (let i = 0; i < data.resultado.length; i++) {
+                                $("#contenedor-cards").append(
+                                        '<div class="container card mt-2">' +
+                                        '<div class="row">' +
+                                        '<div class="col-4">' +
+                                        '<samll>' + data.resultado[i].fecha_creacion + '</samll>' +
+                                        '</div>' +
+                                        '<div class="col-4 text-center">' +
+                                        '<i id="' + data.resultado[i].id + '" class="editar-publicacion like-icon edit-icon fa-solid fa-pen-to-square"></i>' +
+                                        '<i id="' + data.resultado[i].id + '" data-bs-toggle="modal" data-bs-target="#eliminar-publicacion-modal" class="eliminar-publicacion ps-2 like-icon trash-icon fa-solid fa-trash"></i>' +
+                                        '</div>' +
+                                        '<div class="col-4 d-flex justify-content-end">' +
+                                        '<label>' + data.resultado[i].num_votos + '</label>' +
+                                        '<i class="ps-1 like-icon fa-solid fa-thumbs-up"></i>' +
+                                        '<label class="ps-1">' + data.resultado[i].num_comentarios + '</label>' +
+                                        '<i class="ps-1 like-icon fa-solid fa-comment"></i>' +
+                                        '</div>' +
+                                        '</div>' +
+                                        '<div class="row">' +
+                                        '<div class="col text-center">' +
+                                        '<h1>' + data.resultado[i].titulo + '</h1>' +
+                                        '</div>' +
+                                        '</div>' +
+                                        '<div class="row">' +
+                                        '<div class="col text-center">' +
+                                        '<h5>' + data.resultado[i].descripcion + '</h5>' +
+                                        '</div>' +
+                                        '</div>' +
+                                        '<div class="row">' +
+                                        '<div class="col d-flex justify-content-center">' +
+                                        '<div id="imagen' + data.resultado[i].id + '" class="img-publicacion"></div>' +
+                                        '</div>' +
+                                        '</div>' +
+                                        '<div class="row">' +
+                                        '<div class="col text-center">' +
+                                        '<h6>' + data.resultado[i].texto + '</h6>' +
+                                        '</div>' +
+                                        '</div>' +
+                                        '</div>'
+                                        );
+
+                                $("#imagen" + data.resultado[i].id).css("background-image", "url(../../" + data.resultado[i].imagen + ")");
+                            }
+                        }
+                    }).fail(function (jqXHR, textEstado) {
+                        console.log("La solicitud no se pudo realizar error: " + textEstado);
+                    });
+                }
+            }
+            ).fail(function (jqXHR, textEstado)
+            {
+                console.log("La solicitud no se pudo realizar error: " + textEstado);
+            });
+        }
+    });
+    /*----------------------------------------------------------------*/
+    /*                       EDITAR PUBLICACION                       */
+    /*----------------------------------------------------------------*/
     $(document).on('click', '.editar-publicacion', function (e) {
         window.location.href = "../EditarPublicacion/editarpublicacion.html";
         window.localStorage.setItem('publicacionId', e.currentTarget.id);
     });
-
+    /*----------------------------------------------------------------*/
+    /*                       ELIMINAR PUBLICACION                     */
+    /*----------------------------------------------------------------*/
     $(document).on('click', '.eliminar-publicacion', function (e) {
         idPublicacion = e.currentTarget.id;
+        console.log(idPublicacion);
     });
-
     $(document).on('click', '#aceptar-eliminar-publicacion', function () {
         $.ajax({
             data: {"id": idPublicacion},
@@ -92,12 +349,20 @@ $(document).ready(function () {
             console.log("La solicitud no se pudo realizar error: " + textEstado);
         });
     });
-
+    /*----------------------------------------------------------------*/
+    /*                       IR AL INICIO                             */
+    /*----------------------------------------------------------------*/
     $("#logo").click(function () {
         window.location.href = "../../index.html";
     });
+    /*----------------------------------------------------------------*/
+    /*                       IR A NUEVA PUBLICACION                   */
+    /*----------------------------------------------------------------*/
+    /*$("#nueva-publicacion").click(function () {
+     window.location.href = "../Publicacion/publicacion.html";
+     });*/
 
-    $("#nueva-publicacion").click(function () {
+    $(document).on('click', '#nueva-publicacion', function () {
         window.location.href = "../Publicacion/publicacion.html";
     });
 });

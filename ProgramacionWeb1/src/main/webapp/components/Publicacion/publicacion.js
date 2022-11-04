@@ -12,7 +12,9 @@ $.ajax({
 
 $(document).ready(function () {
     let userId = "";
-
+    /*-----------------------------------------------------------*/
+    /*                  OBTENER USUARIO ID                       */
+    /*-----------------------------------------------------------*/
     $.ajax({
         data: {"usuario": window.localStorage.getItem('userName')},
         type: 'POST',
@@ -23,14 +25,15 @@ $(document).ready(function () {
             console.log("No fue posible regresar los datos");
         } else {
             userId = data.resultado.idusuario;
-            console.log(userId);
         }
     }
     ).fail(function (jqXHR, textEstado)
     {
         console.log("La solicitud no se pudo realizar error: " + textEstado);
     });
-
+    /*-----------------------------------------------------------*/
+    /*                  IR A INICIO                              */
+    /*-----------------------------------------------------------*/
     $("#logo").click(function () {
         window.location.href = "../../index.html";
     });
@@ -55,17 +58,16 @@ $(document).ready(function () {
 
     $('#form-publicacion').submit(function (event) {
         event.preventDefault();
+        let formData = new FormData(this);
+        formData.append("idusuarios", userId);
         $.ajax({
-            data: {
-                "idusuarios": userId,
-                "descripcion": $("#descripcion").val(),
-                "imagen": null,
-                "texto": $("#texto").val(),
-                "titulo": $("#titulo").val(),
-                "spoiler": $("#spoiler option:selected").text()},
+            data: formData,
             type: "POST",
             dataType: "json",
-            url: "../../InsertarPublicacion"
+            url: "../../InsertarPublicacion",
+            cache: false,
+            contentType: false,
+            processData: false
         }).done(function (data) {
             if (data.resultado)
             {

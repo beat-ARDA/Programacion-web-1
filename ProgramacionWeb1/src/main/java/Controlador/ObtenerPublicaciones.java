@@ -27,20 +27,32 @@ import java.util.List;
 public class ObtenerPublicaciones extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         List<Publicacion> listaPublicaciones = new ArrayList<Publicacion>();
         HashMap resultado = new HashMap();
         PublicacionDAO publicacionDao = new PublicacionDAO();
         String userId = request.getParameter("userId");
+        String initialLimit = request.getParameter("initialLimit");
+        String nextLimit = request.getParameter("nextLimit");
         int userid = -1;
-        if(userId != null)
-        {
+        int _initialLimit = -1;
+        int _nextLimit = -1;
+
+        if (userId != null) {
             userid = Integer.parseInt(userId);
+        }
+
+        if (initialLimit != null) {
+            _initialLimit = Integer.parseInt(initialLimit);
+        }
+
+        if (nextLimit != null) {
+            _nextLimit = Integer.parseInt(nextLimit);
         }
         Usuarios user = new Usuarios(userid);
 
-        listaPublicaciones = publicacionDao.selectPublicacionesUsuario(user);
+        listaPublicaciones = publicacionDao.selectPublicacionesUsuario(user, _initialLimit, _nextLimit);
 
         if (listaPublicaciones != null) {
             resultado.put("resultado", listaPublicaciones);

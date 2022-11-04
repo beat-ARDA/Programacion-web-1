@@ -4,6 +4,8 @@
  */
 package Model;
 
+import java.sql.Blob;
+
 /**
  *
  * @author e-arduron
@@ -11,8 +13,9 @@ package Model;
 public class Usuarios {
 
     private int idusuario;
-    private String username, nombre, apellidos, contraseña, correo_electronico, imagen_perfil, fechaNacimiento, fechaRegistro;
-
+    private String username, nombre, apellidos, contraseña, correo_electronico, fechaNacimiento, fechaRegistro;
+    private String imagen_perfil;
+    
     public Usuarios() {
     }
 
@@ -44,6 +47,12 @@ public class Usuarios {
     public Usuarios(String username, String contraseña) {
         this.username = username;
         this.contraseña = contraseña;
+    }
+
+    public Usuarios(String nombre, String apellidos, String imagen_perfil) {
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.imagen_perfil = imagen_perfil;
     }
 
     public Usuarios(String username) {

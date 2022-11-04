@@ -38,8 +38,11 @@ public class UsuarioDAO implements UserCRUD {
             if (rs.next()) {
                 usuario = new Usuarios(
                         rs.getString("username"),
-                        rs.getString("nombre"), rs.getString("apellidos"), rs.getString("contraseña"),
-                        rs.getString("correo_electronico"), rs.getString("imagen_perfil"),
+                        rs.getString("nombre"), 
+                        rs.getString("apellidos"), 
+                        rs.getString("contraseña"),
+                        rs.getString("correo_electronico"), 
+                        rs.getString("imagen_perfil"),
                         rs.getString("fechaNacimiento"), rs.getString("fechaRegistro")
                 );
             }
@@ -110,6 +113,28 @@ public class UsuarioDAO implements UserCRUD {
 
             if (rs.next()) {
                 usuario = new Usuarios(rs.getInt("idusuarios"));
+            }
+        } catch (SQLException ex) {
+            System.out.print("Error " + ex);
+        }
+        return usuario;
+    }
+    
+    @Override
+    public Usuarios getUserData(Usuarios user) {
+        String sql = "select nombre, apellidos, imagen_perfil from usuarios where username = '" + user.getUsername().trim() + "';";
+        try {
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+
+            rs = ps.executeQuery(sql);
+
+            if (rs.next()) {
+                usuario = new Usuarios(
+                        rs.getString("nombre"),
+                        rs.getString("apellidos"),
+                        rs.getString("imagen_perfil")
+                );
             }
         } catch (SQLException ex) {
             System.out.print("Error " + ex);

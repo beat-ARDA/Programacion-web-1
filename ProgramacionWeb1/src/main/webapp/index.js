@@ -3,7 +3,6 @@ $.ajax({
     dataType: "json",
     url: "RevisarSesion"
 }).done(function (data, textEstado, jqXHR) {
-    console.log(data);
     if (!data.resultado) {
         window.location.href = "./components/Login/login.html";
     }
@@ -12,22 +11,28 @@ $.ajax({
 });
 
 $(document).ready(function () {
-    $("#button-inicio").click(function () {
-        location.href = "./components/Login/login.html";
+    /*-----------------------------------------------------------------------*/
+    /*                             OBTENER USUARIO DATA HEADER               */
+    /*-----------------------------------------------------------------------*/
+    $.ajax({
+        data: {"usuario": window.localStorage.getItem('userName')},
+        type: 'GET',
+        dataType: "json",
+        url: "./ObtenerUsuarioData"
+    }).done(function (data, textEstado, jqXHR) {
+        if (data)
+        {
+            $("#nombre").text(data.resultado.nombre + " " + data.resultado.apellidos);
+            $("#imagen-perfil").css("background-image", "url( " + data.resultado.imagen_perfil + " )");
+        }
+    }).fail(function (jqXHR, textEstado) {
+        console.log("La solicitud no se pudo realizar error: " + textEstado);
     });
-
-    $("#button-registrarse").click(function () {
-        location.href = "./components/Register/register.html";
-    });
-
-    $("#logo").click(function () {
-        window.location.href = "./components/AdministrarPublicaciones/administrar-publicaciones.html";
-    });
-
+    /*-----------------------------------------------------------------------*/
+    /*                             CERRAR SESION                             */
+    /*-----------------------------------------------------------------------*/
     $("#button-cerrarSession").click(function (event) {
-
         $.ajax({
-
             type: 'GET',
             dataType: "json",
             url: "./CerrarSesion"

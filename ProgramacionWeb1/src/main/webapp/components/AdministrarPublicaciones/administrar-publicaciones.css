@@ -1,5 +1,4 @@
 .imagen-perfil-administrar {
-    background-image: url("../../resources/perfil-vacio.png");
     width: 3rem;
     height: 3rem; /* You must set a specified height */
     background-position: center; /* Center the image */
@@ -44,4 +43,41 @@ footer {
 
 .icono-administrar-usuario {
     height: 1.5rem;
+}
+
+.img-publicacion {
+    width: 20rem;
+    height: 20rem; /* You must set a specified height */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover; /* Resize the background image to cover the entire container */
+}
+
+.like-icon {
+    font-size: 1.5rem;
+}
+
+.edit-icon {
+    color: rgb(0,191,255);
+}
+
+.edit-icon:hover {
+    color: rgba(0,191,255, 0.5)
+}
+
+.trash-icon {
+    color: red;
+}
+
+.trash-icon:hover {
+    color: rgba(255,0,0,0.5);
+}
+
+.nueva-publi {
+    color: rgba(0,191,255,1);
+    font-size: 3rem;
+}
+
+.nueva-publi:hover {
+    color: rgba(0,191,255,0.5)
 }

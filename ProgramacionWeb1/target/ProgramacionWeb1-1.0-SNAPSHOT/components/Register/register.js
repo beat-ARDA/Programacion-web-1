@@ -362,12 +362,14 @@ $(document).ready(function () {
                 banderaContraseñaCheck
                 ) {
             $.ajax({
-                data: $(this).serialize(),
+                data: new FormData(this),
                 type: "POST",
                 dataType: "json",
-                url: "../../InsertarUsuario"
+                url: "../../InsertarUsuario",
+                cache: false,
+                contentType: false,
+                processData: false
             }).done(function (data) {
-                console.log(data);
                 if (data.resultado)
                 {
                     alert("Registro insertado");
@@ -377,6 +379,7 @@ $(document).ready(function () {
                     alert("No se pudo insertar el registro");
                 }
             }).fail(function (jqXHR, textEstado) {
+                console.log(jqXHR);
                 console.log("La solicitud regreso con un error: " + textEstado);
             });
         } else {
