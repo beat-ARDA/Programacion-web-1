@@ -85,11 +85,11 @@ public class InsertarPublicacion extends HttpServlet {
                 0,
                 0
         );
-
-        if (publicacionDao.insertPublicacion(publicacion)) {
-            resultado.put("resultado", true);
+        int res = publicacionDao.insertPublicacion(publicacion);
+        if (res > 0) {
+            resultado.put("resultado", res);
         } else {
-            resultado.put("resultado", false);
+            resultado.put("resultado", -1);
         }
 
         String json = new Gson().toJson(resultado);

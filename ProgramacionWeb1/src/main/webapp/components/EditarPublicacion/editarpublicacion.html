@@ -38,7 +38,7 @@
         </header>
 
         <div class="cuerpo-publicacion container-fluid">
-            <form id="form-publicacion" class="input-group d-flex flex-column">
+            <form id="form-publicacion" class="input-group d-flex flex-column" enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-5">
                         <input type="text" class="form-control" name="titulo" id="titulo" placeholder="Titulo...">
@@ -56,22 +56,14 @@
                             <input class="imagen form-control form-control-sm" id="imagen" accept="image/png, image/jpg, image/jpeg" name="imagen" type="file" />
                             <label id="imagen-fake" class="input-file__btn"  for="imagen">Selecciona una imagen de perfil</label>
                             <div class="img-container mb-2">
-                                <img id="imagen-prev" class="texto-fake" src="" alt="Imagen prev">
+                                <img name="imagen-prev" id="imagen-prev" class="texto-fake" src="" alt="Imagen prev">
                             </div>
                         </div>
                     </div>
                     <div class="col-2 text-center">
                         <label>Tags</label>
-                        <select data-placeholder="Begin typing a name to filter..." multiple class="w-100" name="tags">
+                        <select id="tags" data-placeholder="Begin typing a name to filter..." multiple="multiple" class="w-100" name="tags">
                             <option value="">None</option>
-                            <option>Tecnologia</option>
-                            <option>Web3</option>
-                            <option>Hack</option>
-                            <option>Javascript</option>
-                            <option>Html</option>
-                            <option>Github</option>
-                            <option>Visual studio</option>
-                            <option>Visual code</option>
                         </select>
                         <div class="mt-2 form-check">
                             <input class="form-check-input" type="checkbox" value="spoiler" id="spoiler" name="spoiler">
@@ -82,7 +74,7 @@
                     </div>
                 </div>
                 <textarea class="texto mt-2" id="texto" name="texto"></textarea>
-                <input name="id" value="21"/>
+                <!--<input name="id" value="21"/>-->
             </form>
         </div>
         <footer>Alvaro Ramses Duron Alejo-Facultad de ciencias físico matemáticas</footer>

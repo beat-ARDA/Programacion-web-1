@@ -11,10 +11,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author e-arduron
- */
 public class PublicacionDAO implements PublicacionCRUD {
 
     Conexion cn = new Conexion();
@@ -79,7 +75,7 @@ public class PublicacionDAO implements PublicacionCRUD {
     }
 
     @Override
-    public boolean insertPublicacion(Publicacion publicacion) {
+    public int insertPublicacion(Publicacion publicacion) {
         String sql = "INSERT INTO publicaciones\n"
                 + " (\n"
                 + "texto,\n"
@@ -92,11 +88,12 @@ public class PublicacionDAO implements PublicacionCRUD {
                 + " (\n"
                 + "'" + publicacion.getTexto() + "',\n"
                 + "'" + publicacion.getImagen() + "',\n"
-                //+ "LOAD_FILE('" + publicacion.getImagen() + "'),\n"
                 + "'" + publicacion.getSpoiler() + "',\n"
                 + "'" + publicacion.getDescripcion() + "',\n"
                 + "'" + publicacion.getTitulo() + "',\n"
                 + "'" + publicacion.getIdUsuarios() + "');";
+
+        String sqlGetId = "select id from publicaciones order by id desc limit 1;";
 
         try {
             con = cn.getConnection();
@@ -104,20 +101,37 @@ public class PublicacionDAO implements PublicacionCRUD {
             int resultado = ps.executeUpdate();
 
             if (resultado > 0) {
-                return true;
+                ps = con.prepareStatement(sqlGetId);
+                rs = ps.executeQuery();
+                int res = -1;
+                if (rs.next()) {
+                    res = rs.getInt("id");
+                }
+
+                return res;
             } else {
-                return false;
+                return -1;
             }
         } catch (SQLException ex) {
             System.out.print("Error " + ex);
-            return false;
+            return -1;
         }
     }
 
     @Override
     public boolean updatePublicacion(Publicacion publicacion, Publicacion id) {
-        String sql = "update publicaciones set texto = '" + publicacion.getTexto() + "', imagen = '" + publicacion.getImagen() + "', spoiler = " + publicacion.getSpoiler() + ", descripcion = '" + publicacion.getDescripcion() + "', \n"
+        String sqlImagen = "update publicaciones set texto = '" + publicacion.getTexto() + "', imagen = '" + publicacion.getImagen() + "', spoiler = " + publicacion.getSpoiler() + ", descripcion = '" + publicacion.getDescripcion() + "', \n"
                 + "titulo = '" + publicacion.getTitulo() + "' where id = " + id.getId() + ";";
+
+        String sqlNoImagen = "update publicaciones set texto = '" + publicacion.getTexto() + "', spoiler = " + publicacion.getSpoiler() + ", descripcion = '" + publicacion.getDescripcion() + "', \n"
+                + "titulo = '" + publicacion.getTitulo() + "' where id = " + id.getId() + ";";
+
+        String sql = "";
+        if (publicacion.getImagen().isBlank() || publicacion.getImagen().isEmpty()) {
+            sql = sqlNoImagen;
+        } else {
+            sql = sqlImagen;
+        }
 
         try {
             con = cn.getConnection();
@@ -185,5 +199,60 @@ public class PublicacionDAO implements PublicacionCRUD {
             System.out.print("Error " + ex);
         }
         return publicacion;
+    }
+
+    @Override
+    public List selectPublicaciones(int initialLimit, int nextLimit) {
+        List<Publicacion> listaPublicaciones = new ArrayList<Publicacion>();
+        String sql = "select id, texto, imagen, spoiler, fecha_creacion, eliminada, descripcion, titulo, idusuarios, num_comentarios, num_votos from publicaciones limit " + initialLimit + " offset " + nextLimit + ";";
+        try {
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+
+            rs = ps.executeQuery(sql);
+
+            while (rs.next()) {
+                publicacion = new Publicacion(
+                        rs.getInt("id"),
+                        rs.getInt("idusuarios"),
+                        rs.getString("descripcion"),
+                        rs.getString("fecha_creacion"),
+                        rs.getString("imagen"),
+                        rs.getString("texto"),
+                        rs.getString("titulo"),
+                        rs.getInt("eliminada"),
+                        rs.getInt("spoiler"),
+                        rs.getInt("num_comentarios"),
+                        rs.getInt("num_votos")
+                );
+
+                listaPublicaciones.add(publicacion);
+            }
+            rs.close();
+        } catch (SQLException ex) {
+            System.out.print("Error " + ex);
+        }
+        return listaPublicaciones;
+    }
+
+    @Override
+    public int selectCount() {
+        int cantidad = 0;
+        String sql = "select count(*) from publicaciones;";
+        try {
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+
+            rs = ps.executeQuery(sql);
+
+            while (rs.next()) {
+                cantidad = rs.getInt("count(*)");
+
+            }
+            rs.close();
+        } catch (SQLException ex) {
+            System.out.print("Error " + ex);
+        }
+        return cantidad;
     }
 }

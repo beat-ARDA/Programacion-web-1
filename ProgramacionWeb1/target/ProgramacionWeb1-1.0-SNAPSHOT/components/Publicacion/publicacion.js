@@ -32,6 +32,23 @@ $(document).ready(function () {
         console.log("La solicitud no se pudo realizar error: " + textEstado);
     });
     /*-----------------------------------------------------------*/
+    /*                  OBTENER ETIQUETAS                        */
+    /*-----------------------------------------------------------*/
+    $.ajax({
+        data: {},
+        type: "GET",
+        dataType: "json",
+        url: "../../ObtenerEtiquetas"
+    }).done(function (data) {
+        data.resultado.map((dato) => {
+            $("#tags").append(
+                    '<option id="' + dato.id + '" value="' + dato.id + '">' + dato.etiqueta + '</option>'
+                    );
+        });
+    }).fail(function (jqXHR, textEstado) {
+        console.log("La solicitud regreso con un error: " + textEstado);
+    });
+    /*-----------------------------------------------------------*/
     /*                  IR A INICIO                              */
     /*-----------------------------------------------------------*/
     $("#logo").click(function () {
@@ -55,9 +72,13 @@ $(document).ready(function () {
         const objectURL = URL.createObjectURL(archivo);
         $("#imagen-prev").attr("src", objectURL);
     });
-
+    /*-----------------------------------------------------------*/
+    /*                  ISERTAR PUBLICACION                      */
+    /*-----------------------------------------------------------*/
     $('#form-publicacion').submit(function (event) {
         event.preventDefault();
+
+        /*INSERTAR PUBLICACION*/
         let formData = new FormData(this);
         formData.append("idusuarios", userId);
         $.ajax({
@@ -69,15 +90,21 @@ $(document).ready(function () {
             contentType: false,
             processData: false
         }).done(function (data) {
-            if (data.resultado)
-            {
-                alert("Publicacion insertado");
-                window.location.reload();
-            } else
-            {
-                console.log(data);
-                alert("No se pudo insertar el registro");
-            }
+            let idPublicacion = data.resultado.toString();
+            $("#tags").val().map((dato) => {
+                $.ajax({
+                    data: {"idPubli": idPublicacion, "idEtiqueta": dato},
+                    type: "POST",
+                    dataType: "json",
+                    url: "../../InsertarEtiquetaPublicacion"
+                }).done(function (data) {
+                    console.log(data);
+                }).fail(function (jqXHR, textEstado) {
+                    console.log("La solicitud regreso con un error: " + textEstado);
+                });
+            });
+            alert("Publicacion insertada");
+            window.location = "../AdministrarPublicaciones/administrar-publicaciones.html";
         }).fail(function (jqXHR, textEstado) {
             console.log("La solicitud regreso con un error: " + textEstado);
         });

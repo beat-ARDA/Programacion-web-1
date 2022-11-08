@@ -14,3 +14,36 @@ footer {
     position: fixed;
     bottom: 0;
 }
+
+.index-container {
+    margin-top: 6rem;
+    margin-bottom: 6rem;
+}
+
+.img-publicacion {
+    width: 12rem;
+    height: 12rem; /* You must set a specified height */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover; /* Resize the background image to cover the entire container */
+}
+
+.like-icon {
+    font-size: 1.5rem;
+}
+
+.edit-icon {
+    color: rgb(0,191,255);
+}
+
+.edit-icon:hover {
+    color: rgba(0,191,255, 0.5)
+}
+
+.trash-icon {
+    color: red;
+}
+
+.trash-icon:hover {
+    color: rgba(255,0,0,0.5);
+}
