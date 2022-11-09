@@ -252,4 +252,37 @@ public class PublicacionDAO implements PublicacionCRUD {
         }
         return cantidad;
     }
+
+    @Override
+    public List searchPublicaciones(String valorBusqueda, int initialLimit, int nextLimit) {
+        List<Publicacion> listaPublicaciones = new ArrayList<>();
+        String sql = "select id, texto, imagen, spoiler, fecha_creacion, eliminada, descripcion, titulo, idusuarios, num_comentarios from publicaciones where INSTR(texto, '" + valorBusqueda + "') > 0 or INSTR(titulo, '" + valorBusqueda + "') > 0 limit " + initialLimit + " offset " + nextLimit + ";";
+        try {
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+
+            rs = ps.executeQuery(sql);
+
+            while (rs.next()) {
+                publicacion = new Publicacion(
+                        rs.getInt("id"),
+                        rs.getInt("idusuarios"),
+                        rs.getString("descripcion"),
+                        rs.getString("fecha_creacion"),
+                        rs.getString("imagen"),
+                        rs.getString("texto"),
+                        rs.getString("titulo"),
+                        rs.getInt("eliminada"),
+                        rs.getInt("spoiler"),
+                        rs.getInt("num_comentarios")
+                );
+
+                listaPublicaciones.add(publicacion);
+            }
+            rs.close();
+        } catch (SQLException ex) {
+            System.out.print("Error " + ex);
+        }
+        return listaPublicaciones;
+    }
 }

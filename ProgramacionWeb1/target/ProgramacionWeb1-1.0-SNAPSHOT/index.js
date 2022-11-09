@@ -11,6 +11,144 @@ $.ajax({
 });
 
 $(document).ready(function () {
+    $("#logo").click(function () {
+        window.location.href = "./index.html";
+    });
+
+    let cantidadPublicaciones = -1;
+    let initialLimit = 3;
+    let nextLimit = 0;
+    let publicacionesBusqueda = false;
+    /*-----------------------------------------------------------------------*/
+    /*                      BUSCAR PUBLICACIONES                             */
+    /*-----------------------------------------------------------------------*/
+    $("#search-pub").click(function () {
+        let valorTexto = $("#valorBusqueda").val();
+
+        if (valorTexto.trim() == "") {
+
+        } else {
+            $.ajax({
+                data: {
+                    "valorBusqueda": $("#valorBusqueda").val(),
+                    "initialLimit": initialLimit,
+                    "nextLimit": nextLimit},
+                type: 'GET',
+                dataType: "json",
+                url: "BuscarPublicaciones"
+            }).done(function (data, textEstado, jqXHR) {
+                console.log(data);
+                publicacionesBusqueda = true;
+                $(".card").remove();
+                if (!data.resultado) {
+                    console.log("No fue posible regresar los datos");
+                } else {
+                    for (let i = 0; i < data.resultado.length; i++) {
+                        /*OBTENER CANTIDAD DE VOTOS*/
+                        $.ajax({
+                            data: {
+                                "idPublicacion": data.resultado[i].id},
+                            type: 'GET',
+                            dataType: "json",
+                            url: "ObtenerCantidadVotosPublicacion"
+                        }).done(function (cantidad, textEstado, jqXHR) {
+                            /*OBTENER ID USUARIO*/
+                            $.ajax({
+                                data: {
+                                    "usuario": window.localStorage.getItem('userName')},
+                                type: 'POST',
+                                dataType: "json",
+                                url: "ObtenerUsuario"
+                            }).done(function (usuario, textEstado, jqXHR) {
+                                /*COMPROBAR SI ACTUAL USUARIO LE A DADO LIKE A LA PUBLI*/
+                                $.ajax({
+                                    data: {
+                                        "idUsuario": usuario.resultado.idusuario,
+                                        "idPublicacion": data.resultado[i].id
+                                    },
+                                    type: 'GET',
+                                    dataType: "json",
+                                    url: "ObtenerVotoPorIdUsuario"
+                                }).done(function (existe, textEstado, jqXHR) {
+                                    /*OBTENER CANTIDAD COMENTARIOS*/
+                                    $.ajax({
+                                        data: {
+                                            "idPublicacion": data.resultado[i].id},
+                                        type: 'GET',
+                                        dataType: "json",
+                                        url: "ObtenerCantidadComentarios"
+                                    }).done(function (cantidadComentarios, textEstado, jqXHR) {
+                                        $("#contenedor-cards").append(
+                                                '<div class="container card mt-2">' +
+                                                '<div class="row">' +
+                                                '<div class="col-4">' +
+                                                '<samll>' + data.resultado[i].fecha_creacion + '</samll>' +
+                                                '</div>' +
+                                                '<div class="col-4 text-center">' +
+                                                '<div id="spoiler' + data.resultado[i].id + '" ></div>' +
+                                                '</div>' +
+                                                '<div class="col-4 d-flex justify-content-end">' +
+                                                '<label>' + cantidad.resultado + '</label>' +
+                                                '<i id="icono' + data.resultado[i].id + '" class="like ps-1 like-icon fa-solid fa-thumbs-up"></i>' +
+                                                '<label class="ps-1">' + cantidadComentarios.resultado + '</label>' +
+                                                '<i id="comentario' + data.resultado[i].id + '" data-bs-toggle="modal" data-bs-target="#agregar-comentarios" class="comentario-icon ps-1 like-icon fa-solid fa-comment"></i>' +
+                                                '</div>' +
+                                                '</div>' +
+                                                '<div class="row">' +
+                                                '<div class="col text-center">' +
+                                                '<h1>' + data.resultado[i].titulo + '</h1>' +
+                                                '</div>' +
+                                                '</div>' +
+                                                '<div class="row">' +
+                                                '<div class="col text-center">' +
+                                                '<h5>' + data.resultado[i].descripcion + '</h5>' +
+                                                '</div>' +
+                                                '</div>' +
+                                                '<div class="row">' +
+                                                '<div class="col d-flex justify-content-center">' +
+                                                '<div id="imagen' + data.resultado[i].id + '" class="img-publicacion"></div>' +
+                                                '</div>' +
+                                                '</div>' +
+                                                '<div class="row">' +
+                                                '<div class="col text-center">' +
+                                                '<h6>' + data.resultado[i].texto + '</h6>' +
+                                                '</div>' +
+                                                '</div>' +
+                                                '</div>'
+                                                );
+                                        if (existe.resultado)
+                                        {
+                                            $("#icono" + data.resultado[i].id).addClass("like-blue");
+                                        } else
+                                        {
+                                            $("#icono" + data.resultado[i].id).addClass("like-gray");
+                                        }
+                                        if (data.resultado[i].spoiler == 1) {
+                                            $("#spoiler" + data.resultado[i].id).text("spoiler");
+                                            $("#spoiler" + data.resultado[i].id).css("background-color", "red");
+                                            $("#spoiler" + data.resultado[i].id).css("color", "white");
+                                        }
+                                        $("#imagen" + data.resultado[i].id).css("background-image", "url(" + data.resultado[i].imagen + ")");
+                                    }).fail(function (jqXHR, textEstado) {
+                                        console.log("La solicitud no se pudo realizar error: " + textEstado);
+                                    });
+                                    ;
+                                }).fail(function (jqXHR, textEstado) {
+                                    console.log("La solicitud no se pudo realizar error: " + textEstado);
+                                });
+                            }).fail(function (jqXHR, textEstado) {
+                                console.log("La solicitud no se pudo realizar error: " + textEstado);
+                            });
+                        }).fail(function (jqXHR, textEstado) {
+                            console.log("La solicitud no se pudo realizar error: " + textEstado);
+                        });
+                    }
+                }
+            }).fail(function (jqXHR, textEstado) {
+                console.log(jqXHR);
+            });
+        }
+    });
     let idPub;
     $(document).on('click', '.comentario-icon', function (e) {
         idPub = e.currentTarget.id.split('o')[2];
@@ -135,9 +273,6 @@ $(document).ready(function () {
     /*-----------------------------------------------------------------------*/
     /*              OBTENER CANTIDAD                                         */
     /*-----------------------------------------------------------------------*/
-    let cantidadPublicaciones = -1;
-    let initialLimit = 3;
-    let nextLimit = 0;
     $.ajax({
         type: 'GET',
         dataType: "json",
@@ -203,6 +338,7 @@ $(document).ready(function () {
                                         '<samll>' + data.resultado[i].fecha_creacion + '</samll>' +
                                         '</div>' +
                                         '<div class="col-4 text-center">' +
+                                        '<div id="spoiler' + data.resultado[i].id + '" ></div>' +
                                         '</div>' +
                                         '<div class="col-4 d-flex justify-content-end">' +
                                         '<label>' + cantidad.resultado + '</label>' +
@@ -240,7 +376,11 @@ $(document).ready(function () {
                                 {
                                     $("#icono" + data.resultado[i].id).addClass("like-gray");
                                 }
-
+                                if (data.resultado[i].spoiler == 1) {
+                                    $("#spoiler" + data.resultado[i].id).text("spoiler");
+                                    $("#spoiler" + data.resultado[i].id).css("background-color", "red");
+                                    $("#spoiler" + data.resultado[i].id).css("color", "white");
+                                }
                                 $("#imagen" + data.resultado[i].id).css("background-image", "url(" + data.resultado[i].imagen + ")");
                             }).fail(function (jqXHR, textEstado) {
                                 console.log("La solicitud no se pudo realizar error: " + textEstado);
@@ -265,16 +405,23 @@ $(document).ready(function () {
     /*                       CLICK NEXT PAGINACION                    */
     /*----------------------------------------------------------------*/
     $(document).on('click', '#next', function (e) {
+        let servlet = "";
+        if (publicacionesBusqueda) {
+            servlet = "BuscarPublicaciones";
+        } else {
+            servlet = "ObtenerTodasPublicaciones";
+        }
         if (nextLimit + 3 < cantidadPublicaciones) {
             nextLimit = nextLimit + 3;
             $(".card").remove();
             $.ajax({
                 data: {
+                    "valorBusqueda": $("#valorBusqueda").val(),
                     "initialLimit": initialLimit,
                     "nextLimit": nextLimit},
                 type: 'GET',
                 dataType: "json",
-                url: "ObtenerTodasPublicaciones"
+                url: servlet
             }).done(function (data, textEstado, jqXHR) {
                 if (!data.resultado) {
                     console.log("No fue posible regresar los datos");
@@ -321,6 +468,7 @@ $(document).ready(function () {
                                                 '<samll>' + data.resultado[i].fecha_creacion + '</samll>' +
                                                 '</div>' +
                                                 '<div class="col-4 text-center">' +
+                                                '<div id="spoiler' + data.resultado[i].id + '" ></div>' +
                                                 '</div>' +
                                                 '<div class="col-4 d-flex justify-content-end">' +
                                                 '<label>' + cantidad.resultado + '</label>' +
@@ -358,7 +506,11 @@ $(document).ready(function () {
                                         {
                                             $("#icono" + data.resultado[i].id).addClass("like-gray");
                                         }
-
+                                        if (data.resultado[i].spoiler == 1) {
+                                            $("#spoiler" + data.resultado[i].id).text("spoiler");
+                                            $("#spoiler" + data.resultado[i].id).css("background-color", "red");
+                                            $("#spoiler" + data.resultado[i].id).css("color", "white");
+                                        }
                                         $("#imagen" + data.resultado[i].id).css("background-image", "url(" + data.resultado[i].imagen + ")");
                                     }).fail(function (jqXHR, textEstado) {
                                         console.log("La solicitud no se pudo realizar error: " + textEstado);
@@ -384,16 +536,23 @@ $(document).ready(function () {
     /*                       CLICK PREV PAGINACION                    */
     /*----------------------------------------------------------------*/
     $(document).on('click', '#previous', function (e) {
+        let servlet = "";
+        if (publicacionesBusqueda) {
+            servlet = "BuscarPublicaciones";
+        } else {
+            servlet = "ObtenerTodasPublicaciones";
+        }
         if (nextLimit > 0) {
             nextLimit = nextLimit - 3;
             $(".card").remove();
             $.ajax({
                 data: {
+                    "valorBusqueda": $("#valorBusqueda").val(),
                     "initialLimit": initialLimit,
                     "nextLimit": nextLimit},
                 type: 'GET',
                 dataType: "json",
-                url: "ObtenerTodasPublicaciones"
+                url: servlet
             }).done(function (data, textEstado, jqXHR) {
                 if (!data.resultado) {
                     console.log("No fue posible regresar los datos");
@@ -440,6 +599,7 @@ $(document).ready(function () {
                                                 '<samll>' + data.resultado[i].fecha_creacion + '</samll>' +
                                                 '</div>' +
                                                 '<div class="col-4 text-center">' +
+                                                '<div id="spoiler' + data.resultado[i].id + '" ></div>' +
                                                 '</div>' +
                                                 '<div class="col-4 d-flex justify-content-end">' +
                                                 '<label>' + cantidad.resultado + '</label>' +
@@ -477,7 +637,11 @@ $(document).ready(function () {
                                         {
                                             $("#icono" + data.resultado[i].id).addClass("like-gray");
                                         }
-
+                                        if (data.resultado[i].spoiler == 1) {
+                                            $("#spoiler" + data.resultado[i].id).text("spoiler");
+                                            $("#spoiler" + data.resultado[i].id).css("background-color", "red");
+                                            $("#spoiler" + data.resultado[i].id).css("color", "white");
+                                        }
                                         $("#imagen" + data.resultado[i].id).css("background-image", "url(" + data.resultado[i].imagen + ")");
                                     }).fail(function (jqXHR, textEstado) {
                                         console.log("La solicitud no se pudo realizar error: " + textEstado);

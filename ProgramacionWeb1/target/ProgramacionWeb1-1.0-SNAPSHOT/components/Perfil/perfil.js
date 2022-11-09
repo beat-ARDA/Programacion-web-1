@@ -141,7 +141,7 @@ $(document).ready(function () {
     });
 
     //Imagen perfil
-    $("#imagen-perfil").ready(function () {
+    $("#selecciona-imagen-perfil").ready(function () {
         $("#imagen-perfil-fake").css({"border": "0.15rem solid lightgreen"});
         banderaImagen = true;
     });
@@ -266,7 +266,7 @@ $(document).ready(function () {
         }
     });
 
-    $("#imagen-perfil").change(function () {
+    $("#selecciona-imagen-perfil").change(function () {
         const archivo = $(this).get(0).files[0];
 
         var allowedExtensions = /(.jpg|.jpeg|.png)$/i;

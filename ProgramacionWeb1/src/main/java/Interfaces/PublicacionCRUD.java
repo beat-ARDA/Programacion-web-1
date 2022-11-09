@@ -25,4 +25,6 @@ public interface PublicacionCRUD {
     public boolean deletePublicacion(Publicacion publicacion);
 
     public List selectPublicaciones(int initialLimit, int nextLimit);
+
+    public List searchPublicaciones(String valorBusqueda, int initialLimit, int nextLimit);
 }
