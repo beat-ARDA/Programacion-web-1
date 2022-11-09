@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <script src="../../jquery-3.6.0.min.js"></script>
+        <script src="../../all.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="../../font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="./perfil.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="../Header/header.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="../../bootstrap.min.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="../../all.min.css" media="screen" />
+        <link rel="icon" type="image/x-icon" href="../../resources/logo.svg">
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Perfil</title>
+    </head>
+
+    <body>
+        <header class="header-container">
+            <img id="logo" class="logo" src="../../resources/logo.svg">
+            <div class="search-container">
+                <input placeholder="Buscar.." class="search-input" type="search"/>
+                <button class="button-search">Buscar</button>
+            </div>
+            <div class="perfil-region">
+                <label id="nombre" class="nombre-estilo">Desconocido</label>
+                <div id="imagen-perfil" class="imagen-perfil"></div>
+                <div class="dropdown">
+                    <i class="icono-elipsis fa-solid fa-ellipsis-vertical" data-bs-toggle="dropdown" aria-expanded="false"></i>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="dropdown-item" href="../AdministrarPublicaciones/administrar-publicaciones.html">
+                                Administrar publicaciones
+                            </a>
+                        </li>
+                        <li><a class="dropdown-item" href="#">Perfil</a></li>
+                    </ul>
+                </div>
+                <button id="button-cerrarSession" class="button-inicio">Cerrar session</button>
+            </div>
+        </header>
+
+        <form id="actualizar-form" class="register-container" enctype="multipart/form-data">
+            <div class="register-row">
+                <label class="titulo-control" for="nombres">Nombre(s)</label>
+                <input required class="control"
+                       id="nombres" name="nombres" type="text" />
+                <label id="formato-aviso-nombres"></label>
+            </div>
+
+            <div class="register-row">
+                <label class="titulo-control" for="apellidos">Apellidos</label>
+                <input required class="control"
+                       id="apellidos" name="apellidos" type="text" />
+                <label id="formato-aviso-apellidos"></label>
+            </div>
+
+            <div class="register-row">
+                <label class="titulo-control" for="fecha-nacimiento">Fecha nacimiento</label>
+                <input required class="control" id="fecha-nacimiento" name="fecha-nacimiento" type="date" />
+                <label id="formato-aviso-fecha-nacimiento"></label>
+            </div>
+
+            <div class="register-row">
+                <label class="titulo-control" for="correo-electronico">Correo electronico</label>
+                <input required class="control" id="correo-electronico" name="correo-electronico" type="email" />
+                <label id="formato-aviso-correo"></label>
+            </div>
+
+            <div class="register-row">
+                <label class="titulo-control">Imagen de perfil</label>
+                <input class="control-imagen-perfil" id="imagen-perfil" accept="image/png, image/jpg, image/jpeg" name="imagen-perfil" type="file" />
+                <label id="imagen-perfil-fake" class="input-file__btn"  for="imagen-perfil">Selecciona una imagen de perfil</label>
+                <img id="imagen-perfil-prev" class="texto-perfil-fake" src="" alt="Imagen prev">
+            </div>
+
+            <div class="register-row">
+                <label class="titulo-control" for="nombre-usuario">Nombre de usuario</label>
+                <input required class="control" id="nombre-usuario" name="nombre-usuario" type="text" />
+                <label id="formato-aviso-usuario"></label>
+            </div>
+
+            <div class="register-row">
+                <label class="titulo-control" for="contrasenia">Contraseña</label>
+                <input required class="control" id="contrasenia" name="contrasenia" type="password" />
+                <label id="formato-aviso-contrasenia"></label>
+            </div>
+
+            <div class="register-row">
+                <label class="titulo-control" for="contrasenia-check">Confirmar contraseña</label>
+                <input required class="control" id="contrasenia-check" type="password" />
+                <label id="formato-aviso-contrasenia-check"></label>
+            </div>
+
+            <button class="button-registrar" type="submit">Guardar</button>
+        </form>
+        <footer>Alvaro Ramses Duron Alejo-Facultad de ciencias físico matemáticas</footer>
+    </body>
+    <script src="./perfil.js"></script>
+    <script src="../../bootstrap.bundle.min.js" ></script>
+</html>

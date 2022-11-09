@@ -6,13 +6,13 @@ package Model;
  */
 public class Publicacion {
 
-    private int id, idusuarios, eliminada, spoiler, num_comentarios, num_votos;
+    private int id, idusuarios, eliminada, spoiler, num_comentarios;
     private String descripcion, fecha_creacion, imagen, texto, titulo;
 
     public Publicacion() {
     }
 
-    public Publicacion(int id, int idusuarios, String descripcion, String fecha_creacion, String imagen, String texto, String titulo, int eliminada, int spoiler, int num_comentarios, int num_votos) {
+    public Publicacion(int id, int idusuarios, String descripcion, String fecha_creacion, String imagen, String texto, String titulo, int eliminada, int spoiler, int num_comentarios) {
         this.id = id;
         this.idusuarios = idusuarios;
         this.descripcion = descripcion;
@@ -23,10 +23,9 @@ public class Publicacion {
         this.eliminada = eliminada;
         this.spoiler = spoiler;
         this.num_comentarios = num_comentarios;
-        this.num_votos = num_votos;
     }
 
-    public Publicacion(int idusuarios, String descripcion, String imagen, String texto, String titulo, int spoiler, int num_comentarios, int num_votos) {
+    public Publicacion(int idusuarios, String descripcion, String imagen, String texto, String titulo, int spoiler, int num_comentarios) {
         this.idusuarios = idusuarios;
         this.descripcion = descripcion;
         this.imagen = imagen;
@@ -34,7 +33,6 @@ public class Publicacion {
         this.titulo = titulo;
         this.spoiler = spoiler;
         this.num_comentarios = num_comentarios;
-        this.num_votos = num_votos;
     }
 
     public Publicacion(String descripcion, String imagen, String texto, String titulo, int spoiler) {
@@ -47,10 +45,6 @@ public class Publicacion {
 
     public int getNum_comentarios() {
         return num_comentarios;
-    }
-
-    public int getNum_votos() {
-        return num_votos;
     }
 
     public Publicacion(int id) {

@@ -38,10 +38,10 @@ public class UsuarioDAO implements UserCRUD {
             if (rs.next()) {
                 usuario = new Usuarios(
                         rs.getString("username"),
-                        rs.getString("nombre"), 
-                        rs.getString("apellidos"), 
+                        rs.getString("nombre"),
+                        rs.getString("apellidos"),
                         rs.getString("contraseña"),
-                        rs.getString("correo_electronico"), 
+                        rs.getString("correo_electronico"),
                         rs.getString("imagen_perfil"),
                         rs.getString("fechaNacimiento"), rs.getString("fechaRegistro")
                 );
@@ -93,8 +93,35 @@ public class UsuarioDAO implements UserCRUD {
     }
 
     @Override
-    public boolean updateUser(Usuarios usuario) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public boolean updateUser(Usuarios usuario, String username) {
+        String sqlImagen = "update usuarios set username = '" + usuario.getUsername() + "', nombre = '" + usuario.getNombre() + "', apellidos = '" + usuario.getApellidos() + "', fechaNacimiento = '" + usuario.getFechaNacimiento() + "', \n"
+                + "contraseña = '" + usuario.getContraseña() + "', correo_electronico = '" + usuario.getCorreo_electronico() + "', imagen_perfil = '" + usuario.getImagen_perfil() + "' where username = '" + username + "';";
+
+        String sqlNoImagen = "update usuarios set username = '" + usuario.getUsername() + "', nombre = '" + usuario.getNombre() + "', apellidos = '" + usuario.getApellidos() + "', fechaNacimiento = '" + usuario.getFechaNacimiento() + "', \n"
+                + "contraseña = '" + usuario.getContraseña() + "', correo_electronico = '" + usuario.getCorreo_electronico() + "' where username = '" + username + "';";
+
+        String sql = "";
+        if (usuario.getImagen_perfil().isBlank() || usuario.getImagen_perfil().isEmpty()) {
+            sql = sqlNoImagen;
+        } else {
+            sql = sqlImagen;
+        }
+
+        try {
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+            int resultado = ps.executeUpdate();
+
+            if (resultado > 0) {
+                return true;
+            } else {
+                System.out.print(resultado);
+                return false;
+            }
+        } catch (SQLException ex) {
+            System.out.print("Error " + ex);
+            return false;
+        }
     }
 
     @Override
@@ -119,7 +146,7 @@ public class UsuarioDAO implements UserCRUD {
         }
         return usuario;
     }
-    
+
     @Override
     public Usuarios getUserData(Usuarios user) {
         String sql = "select nombre, apellidos, imagen_perfil from usuarios where username = '" + user.getUsername().trim() + "';";
@@ -134,6 +161,32 @@ public class UsuarioDAO implements UserCRUD {
                         rs.getString("nombre"),
                         rs.getString("apellidos"),
                         rs.getString("imagen_perfil")
+                );
+            }
+        } catch (SQLException ex) {
+            System.out.print("Error " + ex);
+        }
+        return usuario;
+    }
+
+    @Override
+    public Usuarios getUser(Usuarios user) {
+        String sql = "select username, nombre, apellidos, fechaNacimiento, contraseña, correo_electronico, imagen_perfil from usuarios where username = '" + user.getUsername() + "';";
+        try {
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+
+            rs = ps.executeQuery(sql);
+
+            if (rs.next()) {
+                usuario = new Usuarios(
+                        rs.getString("username"),
+                        rs.getString("nombre"),
+                        rs.getString("apellidos"),
+                        rs.getString("contraseña"),
+                        rs.getString("correo_electronico"),
+                        rs.getString("imagen_perfil"),
+                        rs.getString("fechaNacimiento")
                 );
             }
         } catch (SQLException ex) {

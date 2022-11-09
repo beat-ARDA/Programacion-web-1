@@ -47,3 +47,39 @@ footer {
 .trash-icon:hover {
     color: rgba(255,0,0,0.5);
 }
+
+.like-gray {
+    color: rgba(191, 191, 191, 1);
+}
+
+.like-gray:hover {
+    color: rgba(191, 191, 191, 0.5);
+}
+
+.like-blue {
+    color: rgba(30, 144, 255, 1);
+}
+
+.like-blue:hover {
+    color: rgba(30, 144, 255, 0.5);
+}
+
+.like-red {
+    color: rgba(255, 0, 0, 1);
+}
+
+.like-red:hover {
+    color: rgba(255, 0, 0, 0.5);
+}
+
+.modal-container {
+    width: 60%!important;
+}
+
+#contenedor-comentarios {
+    height: 8rem;
+}
+
+.comentario-item {
+    border-bottom: 0.05rem black solid;
+}

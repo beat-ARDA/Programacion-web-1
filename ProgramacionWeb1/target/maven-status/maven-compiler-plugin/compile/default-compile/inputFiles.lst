@@ -1,6 +1,9 @@
+C:\Users\e-arduron\Desktop\MIO\Sem Ago-Dic 2022\Progra web1\Programacion-web-1\ProgramacionWeb1\src\main\java\Controlador\ObtenerTodasPublicaciones.java
 C:\Users\e-arduron\Desktop\MIO\Sem Ago-Dic 2022\Progra web1\Programacion-web-1\ProgramacionWeb1\src\main\java\Interfaces\EtiquetaPublicacionCRUD.java
+C:\Users\e-arduron\Desktop\MIO\Sem Ago-Dic 2022\Progra web1\Programacion-web-1\ProgramacionWeb1\src\main\java\DAO\VotoPublicacionDAO.java
 C:\Users\e-arduron\Desktop\MIO\Sem Ago-Dic 2022\Progra web1\Programacion-web-1\ProgramacionWeb1\src\main\java\Interfaces\PublicacionCRUD.java
 C:\Users\e-arduron\Desktop\MIO\Sem Ago-Dic 2022\Progra web1\Programacion-web-1\ProgramacionWeb1\src\main\java\Controlador\ObtenerPublicaciones.java
+C:\Users\e-arduron\Desktop\MIO\Sem Ago-Dic 2022\Progra web1\Programacion-web-1\ProgramacionWeb1\src\main\java\Interfaces\VotoPublicacionCRUD.java
 C:\Users\e-arduron\Desktop\MIO\Sem Ago-Dic 2022\Progra web1\Programacion-web-1\ProgramacionWeb1\src\main\java\DAO\EtiquetaPublicacionDAO.java
 C:\Users\e-arduron\Desktop\MIO\Sem Ago-Dic 2022\Progra web1\Programacion-web-1\ProgramacionWeb1\src\main\java\Controlador\InsertarEtiquetaPublicacion.java
 C:\Users\e-arduron\Desktop\MIO\Sem Ago-Dic 2022\Progra web1\Programacion-web-1\ProgramacionWeb1\src\main\java\Interfaces\UserCRUD.java
@@ -15,6 +18,7 @@ C:\Users\e-arduron\Desktop\MIO\Sem Ago-Dic 2022\Progra web1\Programacion-web-1\P
 C:\Users\e-arduron\Desktop\MIO\Sem Ago-Dic 2022\Progra web1\Programacion-web-1\ProgramacionWeb1\src\main\java\Controlador\ObtenerUsuarioData.java
 C:\Users\e-arduron\Desktop\MIO\Sem Ago-Dic 2022\Progra web1\Programacion-web-1\ProgramacionWeb1\src\main\java\Controlador\ObtenerCantidadPublicacionesPorUsuario.java
 C:\Users\e-arduron\Desktop\MIO\Sem Ago-Dic 2022\Progra web1\Programacion-web-1\ProgramacionWeb1\src\main\java\DAO\PublicacionDAO.java
+C:\Users\e-arduron\Desktop\MIO\Sem Ago-Dic 2022\Progra web1\Programacion-web-1\ProgramacionWeb1\src\main\java\Model\VotoPublicacion.java
 C:\Users\e-arduron\Desktop\MIO\Sem Ago-Dic 2022\Progra web1\Programacion-web-1\ProgramacionWeb1\src\main\java\Model\Usuarios.java
 C:\Users\e-arduron\Desktop\MIO\Sem Ago-Dic 2022\Progra web1\Programacion-web-1\ProgramacionWeb1\src\main\java\Controlador\InsertarUsuario.java
 C:\Users\e-arduron\Desktop\MIO\Sem Ago-Dic 2022\Progra web1\Programacion-web-1\ProgramacionWeb1\src\main\java\Controlador\RevisarSesion.java
@@ -26,5 +30,9 @@ C:\Users\e-arduron\Desktop\MIO\Sem Ago-Dic 2022\Progra web1\Programacion-web-1\P
 C:\Users\e-arduron\Desktop\MIO\Sem Ago-Dic 2022\Progra web1\Programacion-web-1\ProgramacionWeb1\src\main\java\Model\Publicacion.java
 C:\Users\e-arduron\Desktop\MIO\Sem Ago-Dic 2022\Progra web1\Programacion-web-1\ProgramacionWeb1\src\main\java\Controlador\EliminarEtiquetaPublicacion.java
 C:\Users\e-arduron\Desktop\MIO\Sem Ago-Dic 2022\Progra web1\Programacion-web-1\ProgramacionWeb1\src\main\java\Controlador\CerrarSesion.java
+C:\Users\e-arduron\Desktop\MIO\Sem Ago-Dic 2022\Progra web1\Programacion-web-1\ProgramacionWeb1\src\main\java\Controlador\EliminarVoto.java
+C:\Users\e-arduron\Desktop\MIO\Sem Ago-Dic 2022\Progra web1\Programacion-web-1\ProgramacionWeb1\src\main\java\Controlador\ObtenerCantidadVotosPublicacion.java
 C:\Users\e-arduron\Desktop\MIO\Sem Ago-Dic 2022\Progra web1\Programacion-web-1\ProgramacionWeb1\src\main\java\Controlador\InsertarPublicacion.java
+C:\Users\e-arduron\Desktop\MIO\Sem Ago-Dic 2022\Progra web1\Programacion-web-1\ProgramacionWeb1\src\main\java\Controlador\ObtenerCantidadPublicaciones.java
 C:\Users\e-arduron\Desktop\MIO\Sem Ago-Dic 2022\Progra web1\Programacion-web-1\ProgramacionWeb1\src\main\java\Controlador\ObtenerEtiquetaById.java
+C:\Users\e-arduron\Desktop\MIO\Sem Ago-Dic 2022\Progra web1\Programacion-web-1\ProgramacionWeb1\src\main\java\Controlador\InsertarVoto.java

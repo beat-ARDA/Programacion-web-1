@@ -82,7 +82,6 @@ public class InsertarPublicacion extends HttpServlet {
                 texto,
                 titulo,
                 spoiler,
-                0,
                 0
         );
         int res = publicacionDao.insertPublicacion(publicacion);
