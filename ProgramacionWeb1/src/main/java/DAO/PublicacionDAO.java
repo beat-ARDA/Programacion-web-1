@@ -22,7 +22,7 @@ public class PublicacionDAO implements PublicacionCRUD {
     @Override
     public int selectCount(Usuarios user) {
         int cantidad = 0;
-        String sql = "select count(*) from publicaciones where idusuarios = '" + user.getIdusuario() + "';";
+        String sql = "select count(*) from publicaciones where eliminada != " + 1 + " and idusuarios = '" + user.getIdusuario() + "';";
         try {
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
@@ -42,8 +42,8 @@ public class PublicacionDAO implements PublicacionCRUD {
 
     @Override
     public List selectPublicacionesUsuario(Usuarios user, int initialLimit, int nextLimit) {
-        List<Publicacion> listaPublicaciones = new ArrayList<Publicacion>();
-        String sql = "select id, texto, imagen, spoiler, fecha_creacion, eliminada, descripcion, titulo, idusuarios, num_comentarios from publicaciones where idusuarios = " + user.getIdusuario() + " limit " + initialLimit + " offset " + nextLimit + ";";
+        List<Publicacion> listaPublicaciones = new ArrayList<>();
+        String sql = "select id, texto, imagen, spoiler, fecha_creacion, eliminada, descripcion, titulo, idusuarios, num_comentarios from publicaciones where eliminada != " + 1 + " and idusuarios = " + user.getIdusuario() + " limit " + initialLimit + " offset " + nextLimit + ";";
         try {
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
@@ -151,18 +151,15 @@ public class PublicacionDAO implements PublicacionCRUD {
 
     @Override
     public boolean deletePublicacion(Publicacion publicacion) {
-        String sql = "delete from publicaciones where id = " + publicacion.getId() + ";";
+        //String sql = "delete from publicaciones where id = " + publicacion.getId() + ";";
+        String sql = "update publicaciones set eliminada = " + 1 + " where id = " + publicacion.getId() + ";";
 
         try {
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
             int resultado = ps.executeUpdate();
 
-            if (resultado > 0) {
-                return true;
-            } else {
-                return false;
-            }
+            return resultado > 0;
         } catch (SQLException ex) {
             System.out.print("Error " + ex);
             return false;
@@ -200,9 +197,26 @@ public class PublicacionDAO implements PublicacionCRUD {
     }
 
     @Override
-    public List selectPublicaciones(int initialLimit, int nextLimit) {
-        List<Publicacion> listaPublicaciones = new ArrayList<Publicacion>();
-        String sql = "select id, texto, imagen, spoiler, fecha_creacion, eliminada, descripcion, titulo, idusuarios, num_comentarios from publicaciones limit " + initialLimit + " offset " + nextLimit + ";";
+    public List selectPublicaciones(int initialLimit, int nextLimit, int banderaFiltro) {
+        List<Publicacion> listaPublicaciones = new ArrayList<>();
+        String sql = "";
+
+        switch (banderaFiltro) {
+            case 0:
+                sql = "select id, texto, imagen, spoiler, fecha_creacion, eliminada, descripcion, titulo, idusuarios, num_comentarios from publicaciones where eliminada != " + 1 + " limit " + initialLimit + " offset " + nextLimit + ";";
+                break;
+            case 1:
+                sql = "select id, texto, imagen, spoiler, fecha_creacion, eliminada, descripcion, titulo, idusuarios, num_comentarios from publicaciones where eliminada != " + 1 + " order by fecha_creacion desc limit " + initialLimit + " offset " + nextLimit + ";";
+                break;
+            case 2:
+                sql = "select id, texto, imagen, spoiler, fecha_creacion, eliminada, descripcion, titulo, idusuarios, num_comentarios from publicaciones where eliminada != " + 1 + " order by num_comentarios desc limit " + initialLimit + " offset " + nextLimit + ";";
+                break;
+            case 3:
+                sql = "select id, texto, imagen, spoiler, fecha_creacion, eliminada, descripcion, titulo, idusuarios, num_comentarios from publicaciones where eliminada != " + 1 + " order by num_votos desc limit " + initialLimit + " offset " + nextLimit + ";";
+                break;
+            default:
+                break;
+        }
         try {
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
@@ -235,7 +249,7 @@ public class PublicacionDAO implements PublicacionCRUD {
     @Override
     public int selectCount() {
         int cantidad = 0;
-        String sql = "select count(*) from publicaciones;";
+        String sql = "select count(*) from publicaciones where eliminada != " + 1 + ";";
         try {
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
@@ -256,7 +270,7 @@ public class PublicacionDAO implements PublicacionCRUD {
     @Override
     public List searchPublicaciones(String valorBusqueda, int initialLimit, int nextLimit) {
         List<Publicacion> listaPublicaciones = new ArrayList<>();
-        String sql = "select id, texto, imagen, spoiler, fecha_creacion, eliminada, descripcion, titulo, idusuarios, num_comentarios from publicaciones where INSTR(texto, '" + valorBusqueda + "') > 0 or INSTR(titulo, '" + valorBusqueda + "') > 0 limit " + initialLimit + " offset " + nextLimit + ";";
+        String sql = "select id, texto, imagen, spoiler, fecha_creacion, eliminada, descripcion, titulo, idusuarios, num_comentarios from publicaciones where eliminada != " + 1 + " and (INSTR(texto, '" + valorBusqueda + "') > 0 or INSTR(titulo, '" + valorBusqueda + "') > 0) limit " + initialLimit + " offset " + nextLimit + ";";
         try {
             con = cn.getConnection();
             ps = con.prepareStatement(sql);

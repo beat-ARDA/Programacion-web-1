@@ -22,18 +22,20 @@ public class VotoPublicacionDAO implements VotoPublicacionCRUD {
     Connection con;
     PreparedStatement ps;
     ResultSet rs;
-    VotoPublicacion _votoPublicaion;
 
     @Override
     public boolean insertVoto(VotoPublicacion voto) {
         String sql = "insert into votopublicacion (idUsuario, idPublicacion) values (" + voto.getIdUsuario() + ", " + voto.getIdPublicacion() + ");";
-
+        String sqlIncrementVoto = "update publicaciones set num_votos = num_votos + 1 where id = " + voto.getIdPublicacion() + ";";
         try {
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
-            int resultado = ps.executeUpdate();
+            int resultado1 = ps.executeUpdate();
 
-            if (resultado > 0) {
+            ps = con.prepareStatement(sqlIncrementVoto);
+            int resultado2 = ps.executeUpdate();
+
+            if (resultado1 > 0 && resultado2 > 0) {
                 return true;
             } else {
                 return false;
@@ -47,13 +49,17 @@ public class VotoPublicacionDAO implements VotoPublicacionCRUD {
     @Override
     public boolean deleteVoto(VotoPublicacion voto) {
         String sql = "delete from votopublicacion where idUsuario = " + voto.getIdUsuario() + " and idPublicacion = " + voto.getIdPublicacion() + ";";
+        String sqlDecrementVoto = "update publicaciones set num_votos = num_votos - 1 where id = " + voto.getIdPublicacion() + ";";
 
         try {
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
-            int resultado = ps.executeUpdate();
+            int resultado1 = ps.executeUpdate();
 
-            if (resultado > 0) {
+            ps = con.prepareStatement(sqlDecrementVoto);
+            int resultado2 = ps.executeUpdate();
+
+            if (resultado1 > 0 && resultado2 > 0) {
                 return true;
             } else {
                 return false;

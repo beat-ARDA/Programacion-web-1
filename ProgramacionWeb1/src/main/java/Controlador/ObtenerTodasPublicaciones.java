@@ -28,11 +28,12 @@ public class ObtenerTodasPublicaciones extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<Publicacion> listaPublicaciones = new ArrayList<Publicacion>();
+        List<Publicacion> listaPublicaciones = new ArrayList<>();
         HashMap resultado = new HashMap();
         PublicacionDAO publicacionDao = new PublicacionDAO();
         String initialLimit = request.getParameter("initialLimit");
         String nextLimit = request.getParameter("nextLimit");
+        int banderaFiltro = Integer.parseInt(request.getParameter("banderaFiltro"));
 
         int _initialLimit = -1;
         int _nextLimit = -1;
@@ -45,7 +46,7 @@ public class ObtenerTodasPublicaciones extends HttpServlet {
             _nextLimit = Integer.parseInt(nextLimit);
         }
 
-        listaPublicaciones = publicacionDao.selectPublicaciones(_initialLimit, _nextLimit);
+        listaPublicaciones = publicacionDao.selectPublicaciones(_initialLimit, _nextLimit, banderaFiltro);
 
         if (listaPublicaciones != null) {
             resultado.put("resultado", listaPublicaciones);

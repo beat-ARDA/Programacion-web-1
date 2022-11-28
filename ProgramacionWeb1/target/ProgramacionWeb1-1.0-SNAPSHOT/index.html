@@ -7,7 +7,7 @@
         <link rel="stylesheet" type="text/css" href="index.css" media="screen" />
         <link rel="stylesheet" type="text/css" href="./components//Header/header.css" media="screen" />
         <link rel="stylesheet" type="text/css" href="./all.min.css" media="screen" />
-        <link rel="stylesheet" type="text/css" href="bootstrap.min.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="./bootstrap.min.css" media="screen" />
         <link rel="icon" type="image/x-icon" href="./resources/logo.svg">
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -38,22 +38,30 @@
                 <button id="button-cerrarSession" class="button-inicio">Cerrar session</button>
             </div>
         </header>
+
         <div id="contenedor-cards" class="index-container container">
-            <nav aria-label="Page navigation example">
-                <ul id="pagination" class="pagination">
-                    <li id="previous" class="page-item">
-                        <a class="page-link" href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                    <li id="next" class="page-item">
-                        <a id="pointer" class="page-link" href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
+            <div class="d-flex justify-content-evenly">
+                <input type="checkbox" id="verSpoiler" name="verSpoiler" value="Si">
+                <label for="verSpoiler"> Ver spoilers </label><br>
+                <button id="masRecientes" class="botonDashboard btn-primary">Mas recientes</button>
+                <button id="masComentadas" class="botonDashboard btn-primary">Mas comentadas</button>
+                <button id="masVotadas" class="botonDashboard btn-primary">Mas votadas</button>
+            </div>
         </div>
+        <nav class="container d-flex justify-content-center" aria-label="Page navigation example">
+            <ul id="pagination" class="pagination paginationClass">
+                <li id="previous" class="page-item">
+                    <a class="page-link" href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li id="next" class="page-item">
+                    <a id="pointer" class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
 
         <div 
             class="modal fade" 
@@ -65,33 +73,33 @@
                 <div class="modal-content">
                     <div class="modal-header d-flex justify-content-center">
                         <h5 class="modal-title" id="exampleModalLabel">Comentarios</h5>
-                        
+
                     </div>
                     <div class="modal-body">
                         <div id="contenedor-comentarios">
-                            
-                    </div>
-                </div>
-                <div class="modal-footer d-flex">
-                    <div class="row w-100">
-                        <div class="col-12 text-center">
-                            <h5>Comentario</h5>
-                            <input class="w-100" id="comentario" type="text" value=""/>
+
                         </div>
                     </div>
-                    <div class="row w-100">
-                        <div class="col-12 d-flex justify-content-end">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                            <button id="añadir-comentario" type="button" class="btn btn-primary">Aceptar</button>
+                    <div class="modal-footer d-flex">
+                        <div class="row w-100">
+                            <div class="col-12 text-center">
+                                <h5>Comentario</h5>
+                                <input class="w-100" id="comentario" type="text" value=""/>
+                            </div>
+                        </div>
+                        <div class="row w-100">
+                            <div class="col-12 d-flex justify-content-end">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                <button id="añadir-comentario" type="button" class="btn btn-primary">Aceptar</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <footer>Alvaro Ramses Duron Alejo-Facultad de ciencias físico matemáticas</footer>
-</body>
-<script src="./index.js"></script>
-<script src="./bootstrap.bundle.min.js" ></script>
+        <footer>Alvaro Ramses Duron Alejo-Facultad de ciencias físico matemáticas</footer>
+    </body>
+    <script src="./index.js"></script>
+    <script src="./bootstrap.bundle.min.js" ></script>
 </html>

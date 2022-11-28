@@ -11,6 +11,18 @@ $.ajax({
 });
 
 $(document).ready(function () {
+    function calcularEdad(fecha) {
+        var hoy = new Date();
+        var cumpleanos = new Date(fecha);
+        var edad = hoy.getFullYear() - cumpleanos.getFullYear();
+        var m = hoy.getMonth() - cumpleanos.getMonth();
+
+        if (m < 0 || (m === 0 && hoy.getDate() < cumpleanos.getDate())) {
+            edad--;
+        }
+
+        return edad;
+    }
     /*-----------------------------------------------------------------------*/
     /*                             CERRAR SESION                             */
     /*-----------------------------------------------------------------------*/
@@ -63,6 +75,7 @@ $(document).ready(function () {
         $("#nombres").val(perfil.resultado.nombre);
         $("#apellidos").val(perfil.resultado.apellidos);
         $("#fecha-nacimiento").val(perfil.resultado.fechaNacimiento);
+        $("#edad").text(calcularEdad(perfil.resultado.fechaNacimiento).toString());
         $("#correo-electronico").val(perfil.resultado.correo_electronico);
         $("#imagen-perfil-prev").attr("src", "../../" + perfil.resultado.imagen_perfil);
         $("#nombre-usuario").val(perfil.resultado.username);

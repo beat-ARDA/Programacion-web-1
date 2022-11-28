@@ -7,7 +7,6 @@ package DAO;
 import Config.Conexion;
 import Interfaces.ComentariosCRUD;
 import Model.Comentarios;
-import Model.Publicacion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -30,12 +29,17 @@ public class ComentariosDAO implements ComentariosCRUD {
     @Override
     public boolean insertComentario(Comentarios comentario) {
         String sql = "insert into comentarios (comentario, idPublicacion, idUsuario) values ('" + comentario.getComentario() + "', " + comentario.getIdPub() + ", " + comentario.getIdUsu() + ");";
+        String sqlIncrementComentario = "update publicaciones set num_comentarios = num_comentarios + 1 where id = " + comentario.getIdPub() + ";";
+
         try {
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
-            int resultado = ps.executeUpdate();
+            int resultado1 = ps.executeUpdate();
 
-            if (resultado > 0) {
+            ps = con.prepareStatement(sqlIncrementComentario);
+            int resultado2 = ps.executeUpdate();
+
+            if (resultado1 > 0 && resultado2 > 0) {
                 return true;
             } else {
                 return false;

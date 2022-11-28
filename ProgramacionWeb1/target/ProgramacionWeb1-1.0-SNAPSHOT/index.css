@@ -83,3 +83,20 @@ footer {
 .comentario-item {
     border-bottom: 0.05rem black solid;
 }
+
+.paginationClass {
+    padding-bottom: 2rem;
+}
+
+.botonDashboard {
+    background-color: dodgerblue;
+    text-decoration: none;
+    color:white;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+}
+
+.botonDashboard:hover{
+    background-color: rgba(30,144,255,0.5 );
+}

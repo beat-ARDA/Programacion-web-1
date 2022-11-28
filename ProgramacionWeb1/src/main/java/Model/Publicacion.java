@@ -6,7 +6,7 @@ package Model;
  */
 public class Publicacion {
 
-    private int id, idusuarios, eliminada, spoiler, num_comentarios;
+    private int id, idusuarios, eliminada, spoiler, num_comentarios, num_votos;
     private String descripcion, fecha_creacion, imagen, texto, titulo;
 
     public Publicacion() {
@@ -45,6 +45,10 @@ public class Publicacion {
 
     public int getNum_comentarios() {
         return num_comentarios;
+    }
+
+    public int getNum_votos() {
+        return num_votos;
     }
 
     public Publicacion(int id) {
