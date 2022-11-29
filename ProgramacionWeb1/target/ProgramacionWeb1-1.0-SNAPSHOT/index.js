@@ -147,6 +147,16 @@ $(document).ready(function () {
         });
     });
 
+    let esSpoiler = false;
+    $('#esSpoiler').change(function () {
+        if (this.checked) {
+            esSpoiler = true;
+        } else
+        {
+            esSpoiler = false;
+        }
+    });
+
     let verSpoilers = false;
     $('#verSpoiler').change(function () {
         if (this.checked) {
@@ -869,13 +879,13 @@ $(document).ready(function () {
         }
     });
 
+    /*-----------------------------------------------------------------------*/
+    /*                      CARGAR COMENTARIOS                               */
+    /*-----------------------------------------------------------------------*/
     let idPub;
     $(document).on('click', '.comentario-icon', function (e) {
         idPub = e.currentTarget.id.split('o')[2];
         $(".comentario-item").remove();
-        /*-----------------------------------------------------------------------*/
-        /*                      CARGAR COMENTARIOS                               */
-        /*-----------------------------------------------------------------------*/
 
         $.ajax({
             data: {
@@ -884,11 +894,17 @@ $(document).ready(function () {
             dataType: "json",
             url: "ObtenerComentariosPublicacion"
         }).done(function (data, textEstado, jqXHR) {
-
             data.resultado.map((dato) => {
-                $("#contenedor-comentarios").append(
-                        '<div class="comentario-item">' + dato.comentario + '</div>'
-                        );
+                if (dato.spoiler === 1 && !verSpoilers)
+                {
+                    $("#contenedor-comentarios").append(
+                            '<div class="comentario-spoiler"> Spoiler </div>'
+                            );
+                } else {
+                    $("#contenedor-comentarios").append(
+                            '<div class="comentario-item">' + dato.comentario + '</div>'
+                            );
+                }
             });
         }).fail(function (jqXHR, textEstado) {
             console.log(jqXHR);
@@ -909,6 +925,7 @@ $(document).ready(function () {
         }).done(function (data, textEstado, jqXHR) {
             $.ajax({
                 data: {
+                    "esSpoiler": esSpoiler,
                     "comentario": $("#comentario").val(),
                     "idPublicacion": idPub,
                     "idUsuario": data.resultado.idusuario},

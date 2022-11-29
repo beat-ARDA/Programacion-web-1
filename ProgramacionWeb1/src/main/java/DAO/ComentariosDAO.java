@@ -27,8 +27,8 @@ public class ComentariosDAO implements ComentariosCRUD {
     Comentarios _comentario;
 
     @Override
-    public boolean insertComentario(Comentarios comentario) {
-        String sql = "insert into comentarios (comentario, idPublicacion, idUsuario) values ('" + comentario.getComentario() + "', " + comentario.getIdPub() + ", " + comentario.getIdUsu() + ");";
+    public boolean insertComentario(Comentarios comentario, int spoiler) {
+        String sql = "insert into comentarios (comentario, idPublicacion, idUsuario, spoiler) values ('" + comentario.getComentario() + "', " + comentario.getIdPub() + ", " + comentario.getIdUsu() + ", " + spoiler + ");";
         String sqlIncrementComentario = "update publicaciones set num_comentarios = num_comentarios + 1 where id = " + comentario.getIdPub() + ";";
 
         try {
@@ -53,7 +53,7 @@ public class ComentariosDAO implements ComentariosCRUD {
     @Override
     public List GetComentarios(Comentarios comentario) {
         List<Comentarios> listaComentarios = new ArrayList<Comentarios>();
-        String sql = "select id, comentario, idPublicacion, idUsuario from comentarios where idPublicacion = " + comentario.getIdPub() + ";";
+        String sql = "select id, comentario, idPublicacion, idUsuario, spoiler from comentarios where idPublicacion = " + comentario.getIdPub() + ";";
         try {
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
@@ -65,6 +65,7 @@ public class ComentariosDAO implements ComentariosCRUD {
                         rs.getInt("id"),
                         rs.getInt("idPublicacion"),
                         rs.getInt("idUsuario"),
+                        rs.getInt("spoiler"),
                         rs.getString("comentario")
                 );
 

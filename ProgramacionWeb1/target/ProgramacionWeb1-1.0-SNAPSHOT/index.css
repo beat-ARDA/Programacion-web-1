@@ -84,6 +84,12 @@ footer {
     border-bottom: 0.05rem black solid;
 }
 
+.comentario-spoiler {
+    border-bottom: 0.05rem black solid;
+    color: white;
+    background-color: red;
+}
+
 .paginationClass {
     padding-bottom: 2rem;
 }

@@ -13,7 +13,7 @@ import java.util.List;
  */
 public interface ComentariosCRUD {
 
-    public boolean insertComentario(Comentarios comentario);
+    public boolean insertComentario(Comentarios comentario, int spoiler);
 
     public List GetComentarios(Comentarios comentario);
 

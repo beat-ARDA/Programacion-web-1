@@ -9,10 +9,18 @@ package Model;
  * @author e-arduron
  */
 public class Comentarios {
-    private int id, idPub, idUsu;
+    private int id, idPub, idUsu, spoiler;
     private String comentario;
 
     public Comentarios() {
+    }
+
+    public Comentarios(int id, int idPub, int idUsu, int spoiler, String comentario) {
+        this.id = id;
+        this.idPub = idPub;
+        this.idUsu = idUsu;
+        this.spoiler = spoiler;
+        this.comentario = comentario;
     }
 
     public Comentarios(int id, int idPub, int idUsu, String comentario) {

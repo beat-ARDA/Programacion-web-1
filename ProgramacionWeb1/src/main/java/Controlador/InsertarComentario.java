@@ -30,8 +30,17 @@ public class InsertarComentario extends HttpServlet {
         ComentariosDAO comentariosDao = new ComentariosDAO();
 
         String comentario = request.getParameter("comentario");
+        Boolean esSpoiler = Boolean.valueOf(request.getParameter("esSpoiler"));
         int idPublicacion = Integer.parseInt(request.getParameter("idPublicacion"));
         int idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
+
+        int spoiler = -1;
+        
+        if (esSpoiler) {
+            spoiler = 1;
+        } else if (!esSpoiler) {
+            spoiler = 0;
+        }
 
         Comentarios _comentario = new Comentarios(
                 idPublicacion,
@@ -39,7 +48,7 @@ public class InsertarComentario extends HttpServlet {
                 comentario
         );
 
-        if (comentariosDao.insertComentario(_comentario)) {
+        if (comentariosDao.insertComentario(_comentario, spoiler)) {
             resultado.put("resultado", true);
         } else {
             resultado.put("resultado", false);
